@@ -17,10 +17,10 @@ public class Book {
     }
 
     public boolean check(Book book) {
-        if (book.maSach != this.maSach && this.tenSach.equals(book.tenSach)) {
-            return false;
-        } else {
+        if (book.getMaSach() == this.maSach && this.tenSach.equals(book.getTenSach())) {
             return true;
+        } else {
+            return false;
         }
     }
 
