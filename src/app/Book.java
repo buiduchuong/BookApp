@@ -1,19 +1,19 @@
 package app;
 
-import java.util.Iterator;
-
 public class Book {
     private int maSach;
     private String tenSach, tacGia, NXB;
+    private double donGia;
 
     public Book() {
     }
 
-    public Book(int maSach, String tenSach, String tacGia, String NXB) {
+    public Book(int maSach, String tenSach, String tacGia, String nXB, double donGia) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
-        NXB = NXB;
+        this.NXB = nXB;
+        this.donGia = donGia;
     }
 
     public boolean check(Book book) {
@@ -22,6 +22,12 @@ public class Book {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Book [NXB=" + NXB + ", donGia=" + donGia + ", maSach=" + maSach + ", tacGia=" + tacGia + ", tenSach="
+                + tenSach + "]";
     }
 
     public int getMaSach() {
@@ -54,6 +60,14 @@ public class Book {
 
     public void setNXB(String nXB) {
         NXB = nXB;
+    }
+
+    public double getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(double donGia) {
+        this.donGia = donGia;
     }
 
 }

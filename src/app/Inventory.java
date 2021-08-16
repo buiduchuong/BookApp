@@ -16,19 +16,28 @@ public class Inventory {
     }
 
     public void removeBook(Book book) {
-        listBook.remove(book);
+        for (Iterator iterator = listBook.iterator(); iterator.hasNext();) {
+            Book book2 = (Book) iterator.next();
+            if (book2.check(book)) {
+                listBook.remove(book2);
+            }
+        }
     }
 
     public void sapXep() {
 
     }
 
-    public Book timSach(String nhaXB, String tenSach) {
-        return null;
-    }
-
     public Iterator<Book> timSach(Book book) {
-        return null;
+        List<Book> lBooks = new ArrayList<Book>();
+        Iterator<Book> i = listBook.iterator();
+        while (i.hasNext()) {
+            Book book2 = i.next();
+            if (book2.check(book)) {
+                lBooks.add(book2);
+            }
+        }
+        return lBooks.iterator();
     }
 
 }
