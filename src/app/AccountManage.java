@@ -7,10 +7,11 @@ import java.util.List;
 import app.interfaces.Manage;
 
 public class AccountManage implements Manage {
-    List<Account> list;
+    private List<Account> list;
 
     public AccountManage() {
         list = new ArrayList<Account>();
+        add(new Account("admin", "password", 0));
     }
 
     @Override
@@ -26,7 +27,17 @@ public class AccountManage implements Manage {
                 list.remove(account);
             }
         }
+    }
 
+    public boolean login(Account account1) {
+        Iterator<Account> i = list.iterator();
+        while (i.hasNext()) {
+            Account account = i.next();
+            if (account.check(account1)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -41,10 +52,21 @@ public class AccountManage implements Manage {
         }
         return lBooks.iterator();
     }
+    
 
     @Override
     public void inDS() {
-        // TODO Auto-generated method stub
-
+        for (Account account : list) {
+            System.out.println(account.toString() );
+        }
     }
+
+    public List<Account> getList() {
+        return list;
+    }
+
+    public void setList(List<Account> list) {
+        this.list = list;
+    }
+
 }
