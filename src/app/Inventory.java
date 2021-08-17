@@ -3,28 +3,44 @@ package app;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import app.interfaces.Manage;
 
-public class Inventory {
+public class Inventory implements Manage {
     private List<Book> listBook;
-    private Book book;
 
     public Inventory() {
         listBook = new ArrayList<Book>();
 
     }
 
-    public void addBook(Book book) {
-        listBook.add(book);
+    @Override
+    public void add(Object object) {
+        listBook.add((Book) object);
+
     }
 
-    public String removeBook(Book book) {
+    @Override
+    public void remove(Object object) {
         for (Book book2 : listBook) {
-            if (book.check(book2)) {
+            if (((Book) object).check(book2)) {
                 listBook.remove(book2);
-                return "";
+
+            }
+
+        }
+    }
+
+    @Override
+    public Iterator<Book> search(Object object) {
+        List<Book> lBooks = new ArrayList<Book>();
+        Iterator<Book> i = listBook.iterator();
+        while (i.hasNext()) {
+            Book book2 = i.next();
+            if (((Book) object).check(book2)) {
+                lBooks.add(book2);
             }
         }
-        return null;
+        return lBooks.iterator();
     }
 
     public void inDS() {
@@ -37,28 +53,19 @@ public class Inventory {
 
     }
 
-    public Iterator<Book> timSach(Book book) {
-        List<Book> lBooks = new ArrayList<Book>();
+    
+
+    public void addBookCart(Book book) {
+        Cart cart = new Cart();
         Iterator<Book> i = listBook.iterator();
         while (i.hasNext()) {
             Book book2 = i.next();
             if (book2.check(book)) {
-                lBooks.add(book2);
+                cart.add(book2);
+                System.out.println("add successful");
+                remove(book2);;
             }
         }
-        return lBooks.iterator();
-    }
-    public Iterator<Book> addBookCart(Book book) {
-        this.book = book;
-        List<Book> lBooks = new ArrayList<Book>();
-        Iterator<Book> i = listBook.iterator();
-        while (i.hasNext()) {
-            Book book2 = i.next();
-            if (book2.check(book)) {
-                lBooks.add(book2);
-            }
-        }
-        return lBooks.iterator();
     }
 
 }

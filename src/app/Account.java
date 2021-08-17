@@ -1,21 +1,48 @@
 package app;
 
 public class Account {
-  private  String account, matkhau;
+    private String account, password;
+    private double balance;
 
-public String getAccount() {
-    return account;
-}
+    public Account() {
 
-public String getMatkhau() {
-    return matkhau;
-}
+    }
 
-public void setMatkhau(String matkhau) {
-    this.matkhau = matkhau;
-}
+    public Account(String account, String password, double balance) {
+        this.account = account;
+        this.password = password;
+        this.balance = 0;
+    }
 
-public void setAccount(String account) {
-    this.account = account;
-}
+    public boolean check(Account account) {
+        if (account.getAccount().equals(this.account)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
 }
