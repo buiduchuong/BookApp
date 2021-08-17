@@ -9,8 +9,13 @@ public class TestDriverBook {
     public static void main(String[] args) {
         AccountManage accountManage = new AccountManage();
         khoiTaoDSAcc(accountManage);
+        System.out.println("Username:  ");
+        String account1 = sc.nextLine();
+        System.out.println("Password: ");
+        String password = sc.nextLine();
 
-        Account account = new Account("admin", "password", 1);
+        Account account = new Account(account1, password, 1);
+
         if (accountManage.login(account)) {
 
             Iterator<Account> iterator = accountManage.search(account);
@@ -19,16 +24,13 @@ public class TestDriverBook {
             int i = accountManage.getList().indexOf(account2);
             if (!str.equals(accountManage.getList().get(i).getAccount())) {
                 customerFunction();
-
             } else {
                 managerFunction(accountManage);
-                System.out.println(i);
             }
 
         } else {
             System.out.println("Incorrect username or password");
         }
-
     }
 
     public static void khoiTaoDSAcc(AccountManage accountManage) {
