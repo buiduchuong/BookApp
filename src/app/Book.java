@@ -4,16 +4,18 @@ public class Book {
     private int maSach;
     private String tenSach, tacGia, NXB;
     private double donGia;
+    private int soluong;
 
     public Book() {
     }
 
-    public Book(int maSach, String tenSach, String tacGia, String nXB, double donGia) {
+    public Book(int maSach, String tenSach, String tacGia, String nXB, double donGia,int soluong) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
         this.NXB = nXB;
         this.donGia = donGia;
+        this.soluong = soluong;
     }
 
     public boolean check(Book book) {
@@ -24,10 +26,12 @@ public class Book {
         }
     }
 
+   
+
     @Override
     public String toString() {
-        return "Book [NXB=" + NXB + ", donGia=" + donGia + ", maSach=" + maSach + ", tacGia=" + tacGia + ", tenSach="
-                + tenSach + "]";
+        return "Book [NXB=" + NXB + ", donGia=" + donGia + ", maSach=" + maSach + ", soluong=" + soluong + ", tacGia="
+                + tacGia + ", tenSach=" + tenSach + "]";
     }
 
     public int getMaSach() {
@@ -69,5 +73,14 @@ public class Book {
     public void setDonGia(double donGia) {
         this.donGia = donGia;
     }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+    
 
 }
