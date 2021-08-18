@@ -53,17 +53,22 @@ public class Inventory implements Manage {
 
     }
 
-    
-
-    public void addBookCart(Book book) {
-        Cart cart = new Cart();
+    public void addBookCart(Book book,Cart cart) {
+        
         Iterator<Book> i = listBook.iterator();
         while (i.hasNext()) {
             Book book2 = i.next();
-            if (book2.check(book)) {
-                cart.add(book2);
-                System.out.println("add successful");
-                remove(book2);;
+            int amount = book2.getSoluong();
+            if (amount < 1) {
+                System.out.println("Quyen sach nay da het");
+            } else {
+                if (book2.check(book)) {
+                    cart.add(book2);
+                    amount--;
+                    book2.setSoluong(amount);
+                    System.out.println("add successful");
+
+                }
             }
         }
     }

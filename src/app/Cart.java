@@ -36,7 +36,10 @@ public class Cart implements Manage {
 
     @Override
     public void inDS() {
-        // TODO Auto-generated method stub
+       
+        for (Book book : list) {
+            System.out.println(book.toString());
+        }
         
     }
 }
