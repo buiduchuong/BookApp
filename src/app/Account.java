@@ -15,16 +15,18 @@ public class Account {
     }
 
     public boolean check(Account account) {
-        if (account.getAccount().equals(this.account) && account.getPassword().equals(this.password)) {
-            return true;
-        } else {
+        if (!account.getAccount().equals(this.account)) {
             return false;
         }
+        if (!account.getPassword().equals(this.password)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Account [account=" + account + ", balance=" + balance + ", password=" + password + "]";
+        return "Account [account=" + account + ", balance=" + balance + "$" + ", password=" + password + "]";
     }
 
     public String getAccount() {

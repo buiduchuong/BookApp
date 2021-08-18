@@ -30,7 +30,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [NXB=" + NXB + ", donGia=" + donGia + ", maSach=" + maSach + ", soluong=" + soluong + ", tacGia="
+        return "Book [NXB=" + NXB + ", donGia=" + donGia +"$"+ ", maSach=" + maSach + ", soluong=" + soluong + ", tacGia="
                 + tacGia + ", tenSach=" + tenSach + "]";
     }
 

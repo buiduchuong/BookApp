@@ -42,15 +42,15 @@ public class AccountManage implements Manage {
 
     @Override
     public Iterator<Account> search(Object object) {
-        List<Account> lBooks = new ArrayList<Account>();
+        List<Account> lAccounts = new ArrayList<Account>();
         Iterator<Account> i = list.iterator();
         while (i.hasNext()) {
             Account account = i.next();
             if (account.check((Account) object)) {
-                lBooks.add(account);
+                lAccounts.add(account);
             }
         }
-        return lBooks.iterator();
+        return lAccounts.iterator();
     }
     
 

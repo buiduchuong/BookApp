@@ -7,6 +7,8 @@ public class TestDriverBook {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        khoiTaoDS(inventory);
         AccountManage accountManage = new AccountManage();
         khoiTaoDSAcc(accountManage);
         System.out.println("Username:  ");
@@ -23,9 +25,11 @@ public class TestDriverBook {
             String str = "admin";
             int i = accountManage.getList().indexOf(account2);
             if (!str.equals(accountManage.getList().get(i).getAccount())) {
-                customerFunction();
+                customerFunction(inventory);
             } else {
-                managerFunction(accountManage);
+                while (true) {
+                    managerFunction(accountManage, inventory);
+                }
             }
 
         } else {
@@ -56,31 +60,51 @@ public class TestDriverBook {
 
     }
 
-    public static void managerFunction(AccountManage accountManage) {
+    public static void managerFunction(AccountManage accountManage, Inventory inventory) {
 
         System.out.println("1. View the list of accounts");
         System.out.println("2. Search account");
         System.out.println("3. Delete the account");
+        System.out.println("4. Add books to inventory");
+        System.out.println("5. Delete books to inventory");
+        System.out.println("6. View inventory books list to inventory");
+
         // System.out.println("3. Add books to cart");
         switch (sc.nextInt()) {
             case 1:
                 accountManage.inDS();
                 break;
             case 2:
-                accountManage.search(new Account("aaa", "cc", 0));
+                Iterator iterator = accountManage.search(new Account("a", "c", 0));
+                if (iterator.hasNext()) {
+                    while (iterator.hasNext()) {
+                        Account account = (Account) iterator.next();
+                        System.out.println(account.toString());
+                    }
+                } else {
+                    System.out.println("not found");
+                }
                 break;
             case 3:
                 accountManage.remove(new Account("aaa", "cc", 0));
+                break;
+            case 4:
+                inventory.add(new Book(3391, "Java 102", "MJ", "2/2/991", 55.32, 3));
+                System.out.println("add successfula");
+                break;
+            case 5:
+                accountManage.remove(new Account("aaa", "cc", 0));
+                break;
+            case 6:
+                inventory.inDS();
                 break;
             default:
                 break;
         }
     }
 
-    public static void customerFunction() {
-
-        Inventory inventory = new Inventory();
-        khoiTaoDS(inventory);
+    public static void customerFunction(Inventory inventory) {
+       
         System.out.println("1. View inventory books list");
         System.out.println("2. Search book");
         System.out.println("3. Add books to cart");
@@ -90,11 +114,21 @@ public class TestDriverBook {
 
                 break;
             case 2:
-                inventory.search(new Book(2291, "Đắc nhân tâm", "Dale Carnegie", "Kim Đồng", 50, 0));
+                Iterator iterator = inventory
+                        .search(new Book(2291, "Đắc nhân tâm", "Dale Carnegie", "Kim Đồng", 50, 0));
+                if (iterator.hasNext()) {
+                    while (iterator.hasNext()) {
+                        Book book2 = (Book) iterator.next();
+                        System.out.println(book2.toString());
+                    }
+                } else {
+                    System.out.println("not found");
+                }
                 break;
             case 3:
                 inventory.addBookCart(new Book(2291, "Tôi thấy hoa vàng trên cỏ xanh", "Nguyễn Nhật Ánh",
                         "9 tháng 12, 2010", 100, 0));
+
                 break;
 
             default:
