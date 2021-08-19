@@ -24,33 +24,46 @@ public class TestDriverBook {
         }
 
         while (true) {
+            System.out.println("1. Sign in");
+            System.out.println("2. Sign up");
+            int number = sc.nextInt();
+            sc.nextLine();
+            switch (number) {
+                case 1:
+                    Account account = nhap();
+                    if (Login.login(account, accountManage)) {
+                        Iterator<Account> iterator = accountManage.search(account);
+                        Account account2 = (Account) iterator.next();
+                        String str = "admin";
+                        int i = accountManage.getList().indexOf(account2);
+                        if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
 
-            System.out.println("Username:  ");
-            String account1 = sc.nextLine();
-            System.out.println("Password: ");
-            String password = sc.nextLine();
+                            customerFunction(inventoryManage, cartManage);
+                        } else {
 
-            Account account = new Account(account1, password);
+                            managerFunction(accountManage, inventoryManage);
 
-            if (((AccountManage) accountManage).login(account)) {
+                        }
 
-                Iterator<Account> iterator = accountManage.search(account);
-                Account account2 = (Account) iterator.next();
-                String str = "admin";
-                int i = accountManage.getList().indexOf(account2);
-                if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
+                    } else {
+                        System.out.println("Incorrect username or password");
+                    }
+                    break;
 
-                    customerFunction(inventoryManage, cartManage);
-                } else {
-
-                    managerFunction(accountManage, inventoryManage);
-
-                }
-
-            } else {
-                System.out.println("Incorrect username or password");
+                default:
+                    Login.signUp(nhap(), accountManage);
+                    break;
             }
+
         }
+    }
+
+    public static Account nhap() {
+        System.out.println("Username:  ");
+        String account1 = sc.nextLine();
+        System.out.println("Password: ");
+        String password = sc.nextLine();
+        return new Account(account1, password);
     }
 
     public static void khoiTaoDS(Manage inventory, Manage accountManage) throws ParseException {

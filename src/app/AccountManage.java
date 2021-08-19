@@ -28,16 +28,7 @@ public class AccountManage implements Manage {
         }
     }
 
-    public boolean login(Account account1) {
-        Iterator<Account> i = listAccounts.iterator();
-        while (i.hasNext()) {
-            Account account = i.next();
-            if (account.check(account1)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     @Override
     public Iterator<Account> search(Object object) {
