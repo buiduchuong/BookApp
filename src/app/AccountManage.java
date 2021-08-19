@@ -7,29 +7,29 @@ import java.util.List;
 import app.interfaces.Manage;
 
 public class AccountManage implements Manage {
-    private List<Account> list;
+    private List<Account> listAccounts;
 
     public AccountManage() {
-        this.list = new ArrayList<Account>();
+        this.listAccounts = new ArrayList<Account>();
         add(new Account("admin", "password", 0));
     }
 
     @Override
     public void add(Object object) {
-        list.add((Account) object);
+        listAccounts.add((Account) object);
     }
 
     @Override
     public void remove(Object object) {
-        for (Account account : list) {
+        for (Account account : listAccounts) {
             if (account.check((Account) object)) {
-                list.remove(account);
+                listAccounts.remove(account);
             }
         }
     }
 
     public boolean login(Account account1) {
-        Iterator<Account> i = list.iterator();
+        Iterator<Account> i = listAccounts.iterator();
         while (i.hasNext()) {
             Account account = i.next();
             if (account.check(account1)) {
@@ -42,7 +42,7 @@ public class AccountManage implements Manage {
     @Override
     public Iterator<Account> search(Object object) {
         List<Account> lAccounts = new ArrayList<Account>();
-        Iterator<Account> i = list.iterator();
+        Iterator<Account> i = listAccounts.iterator();
         while (i.hasNext()) {
             Account account = i.next();
             if (account.check((Account) object)) {
@@ -54,17 +54,17 @@ public class AccountManage implements Manage {
 
     @Override
     public void inDS() {
-        for (Account account : list) {
+        for (Account account : listAccounts) {
             System.out.println(account.toString());
         }
     }
 
     public List<Account> getList() {
-        return list;
+        return listAccounts;
     }
 
     public void setList(List<Account> list) {
-        this.list = list;
+        this.listAccounts = list;
     }
 
 }

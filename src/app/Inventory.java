@@ -53,8 +53,8 @@ public class Inventory implements Manage {
 
     }
 
-    public void addBookCart(Book book,Cart cart) {
-        
+    public void addBookCart(Book book, Manage cart) {
+
         Iterator<Book> i = listBook.iterator();
         while (i.hasNext()) {
             Book book2 = i.next();
@@ -66,11 +66,16 @@ public class Inventory implements Manage {
                     cart.add(book2);
                     amount--;
                     book2.setSoluong(amount);
-                    System.out.println("add successful");
 
                 }
             }
         }
+    }
+
+    @Override
+    public List<Book> getList() {
+
+        return listBook;
     }
 
 }

@@ -1,18 +1,27 @@
 package app;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Scanner;
+
+import app.interfaces.Manage;
 
 public class TestDriverBook {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Inventory inventory = new Inventory();
-        AccountManage accountManage = new AccountManage();
-        Cart cart = new Cart();
-        khoiTaoDS(inventory, accountManage);
 
-       
+        Manage inventoryManage, accountManage, cartManage;
+        inventoryManage = new Inventory();
+        accountManage = new AccountManage();
+        cartManage = new Cart();
+
+        try {
+            khoiTaoDS(inventoryManage, accountManage);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         while (true) {
 
@@ -23,18 +32,18 @@ public class TestDriverBook {
 
             Account account = new Account(account1, password);
 
-            if (accountManage.login(account)) {
+            if (((AccountManage) accountManage).login(account)) {
 
                 Iterator<Account> iterator = accountManage.search(account);
                 Account account2 = (Account) iterator.next();
                 String str = "admin";
                 int i = accountManage.getList().indexOf(account2);
-                if (!str.equals(accountManage.getList().get(i).getAccount())) {
+                if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
 
-                    customerFunction(inventory, cart);
+                    customerFunction(inventoryManage, cartManage);
                 } else {
 
-                    managerFunction(accountManage, inventory);
+                    managerFunction(accountManage, inventoryManage);
 
                 }
 
@@ -44,31 +53,33 @@ public class TestDriverBook {
         }
     }
 
-    public static void khoiTaoDSAcc(AccountManage accountManage) {
+    public static void khoiTaoDS(Manage inventory, Manage accountManage) throws ParseException {
 
-    }
-
-    public static void khoiTaoDS(Inventory inventory, AccountManage accountManage) {
-
-        inventory.add(new Book(2291, "Đắc nhân tâm", "Dale Carnegie", "Kim Đồng", 50, 2));
-        inventory.add(new Book(124, "Being A Happy Teenager", "Andrew Matthews", "tháng 11 năm 2001", 219.9, 83));
-        inventory.add(
-                new Book(542, "Cho tôi xin 1 vé đi tuổi thơ", "Nguyễn Nhật Ánh", "1 tháng 2 năm 2008", 139.04, 99));
-        inventory.add(new Book(423, "Tôi thấy hoa vàng trên cỏ xanh", "Nguyễn Nhật Ánh", "9 tháng 12, 2010", 100, 120));
-        inventory.add(new Book(657, "Harry Potter and the Philosopher's Stone", "J K Rowling", "26 tháng 6, 1997",
-                209.1, 13));
-        inventory.add(new Book(56756, "Người bán hàng vĩ đại nhất thế giới", "Og Mandino", "1.1.1983", 159.2, 11));
-        inventory.add(new Book(657, "Trump – Đừng Bao Giờ Bỏ Cuộc", "Meredith McIver  Donald J. Trump", "1.1, 2008",
-                27.13, 93));
-        inventory.add(new Book(344, "the Catcher in the Rye", "J. D. Salinger", "1.1.2001", 44.98, 29));
-        inventory.add(new Book(331, "The Old Man and the Sea", "Hemingway", "5.5.1995", 88.13, 82));
+        inventory.add(new Book(2291, "Đắc nhân tâm", "Dale Carnegie",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 50, 2));
+        inventory.add(new Book(124, "Being A Happy Teenager", "Andrew Matthews",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 219.9, 83));
+        inventory.add(new Book(542, "Cho tôi xin 1 vé đi tuổi thơ", "Nguyễn Nhật Ánh",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 139.04, 99));
+        inventory.add(new Book(423, "Tôi thấy hoa vàng trên cỏ xanh", "Nguyễn Nhật Ánh",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 100, 120));
+        inventory.add(new Book(657, "Harry Potter and the Philosopher's Stone", "J K Rowling",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 209.1, 13));
+        inventory.add(new Book(56756, "Người bán hàng vĩ đại nhất thế giới", "Og Mandino",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 159.2, 11));
+        inventory.add(new Book(657, "Trump – Đừng Bao Giờ Bỏ Cuộc", "Meredith McIver  Donald J. Trump",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 27.13, 93));
+        inventory.add(new Book(344, "the Catcher in the Rye", "J. D. Salinger",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 44.98, 29));
+        inventory.add(new Book(331, "The Old Man and the Sea", "Hemingway",
+                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 88.13, 82));
 
         accountManage.add(new Account("a", "ac"));
         accountManage.add(new Account("b", "ac"));
 
     }
 
-    public static void managerFunction(AccountManage accountManage, Inventory inventory) {
+    public static void managerFunction(Manage accountManage, Manage inventory) {
         boolean check = true;
         while (check) {
 
@@ -99,8 +110,13 @@ public class TestDriverBook {
                     accountManage.remove(new Account("a", "ac"));
                     break;
                 case 4:
-                    inventory.add(new Book(3391, "Java 102", "MJ", "2/2/991", 55.32, 3));
-                    System.out.println("add successfula");
+                    try {
+                        inventory.add(new Book(3391, "Java 102", "MJ",
+                                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 55.32, 3));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("add successful");
                     break;
                 case 5:
                     inventory.remove(new Book(344, "the Catcher in the Rye"));
@@ -116,7 +132,7 @@ public class TestDriverBook {
         }
     }
 
-    public static void customerFunction(Inventory inventory, Cart cart) {
+    public static void customerFunction(Manage inventory, Manage cart) {
         boolean check = true;
         while (check) {
 
@@ -131,8 +147,7 @@ public class TestDriverBook {
 
                     break;
                 case 2:
-                    Iterator<Book> iterator = inventory
-                            .search(new Book(2291, "Đắc nhân tâm", "Dale Carnegie", "Kim Đồng", 50, 0));
+                    Iterator<Book> iterator = inventory.search(new Book(2291, "Đắc nhân tâm"));
                     if (iterator.hasNext()) {
                         while (iterator.hasNext()) {
                             Book book2 = (Book) iterator.next();
@@ -143,7 +158,11 @@ public class TestDriverBook {
                     }
                     break;
                 case 3:
-                    inventory.addBookCart(new Book(2291, "Đắc nhân tâm", "Dale Carnegie", "Kim Đồng", 50, 2), cart);
+                    System.out.println("Nhap ma sach can them vao gio do");
+                    int maSach = sc.nextInt();
+
+                    ((Inventory) inventory).addBookCart(new Book(maSach), cart);
+
                     break;
                 case 4:
                     cart.inDS();
