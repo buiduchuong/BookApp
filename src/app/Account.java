@@ -8,6 +8,11 @@ public class Account {
 
     }
 
+    public Account(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
     public Account(String account, String password, double balance) {
         this.account = account;
         this.password = password;

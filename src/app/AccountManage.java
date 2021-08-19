@@ -10,13 +10,12 @@ public class AccountManage implements Manage {
     private List<Account> list;
 
     public AccountManage() {
-        list = new ArrayList<Account>();
+        this.list = new ArrayList<Account>();
         add(new Account("admin", "password", 0));
     }
 
     @Override
     public void add(Object object) {
-        // TODO Auto-generated method stub
         list.add((Account) object);
     }
 
@@ -52,12 +51,11 @@ public class AccountManage implements Manage {
         }
         return lAccounts.iterator();
     }
-    
 
     @Override
     public void inDS() {
         for (Account account : list) {
-            System.out.println(account.toString() );
+            System.out.println(account.toString());
         }
     }
 

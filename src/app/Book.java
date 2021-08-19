@@ -9,7 +9,12 @@ public class Book {
     public Book() {
     }
 
-    public Book(int maSach, String tenSach, String tacGia, String nXB, double donGia,int soluong) {
+    public Book(int maSach, String tenSach) {
+        this.maSach = maSach;
+        this.tenSach = tenSach;
+    }
+
+    public Book(int maSach, String tenSach, String tacGia, String nXB, double donGia, int soluong) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
@@ -19,19 +24,19 @@ public class Book {
     }
 
     public boolean check(Book book) {
-        if (book.getMaSach() == this.maSach && this.tenSach.equals(book.getTenSach())) {
-            return true;
-        } else {
+        if (book.getMaSach() != this.maSach) {
             return false;
         }
+        if (!book.getTenSach().equals(this.tenSach)) {
+            return false;
+        }
+        return true;
     }
-
-   
 
     @Override
     public String toString() {
-        return "Book [NXB=" + NXB + ", donGia=" + donGia +"$"+ ", maSach=" + maSach + ", soluong=" + soluong + ", tacGia="
-                + tacGia + ", tenSach=" + tenSach + "]";
+        return "Book [NXB=" + NXB + ", donGia=" + donGia + "$" + ", maSach=" + maSach + ", soluong=" + soluong
+                + ", tacGia=" + tacGia + ", tenSach=" + tenSach + "]";
     }
 
     public int getMaSach() {
@@ -81,6 +86,5 @@ public class Book {
     public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
-    
 
 }

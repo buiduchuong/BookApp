@@ -22,7 +22,7 @@ public class Inventory implements Manage {
     @Override
     public void remove(Object object) {
         for (Book book2 : listBook) {
-            if (((Book) object).check(book2)) {
+            if (book2.check((Book) object)) {
                 listBook.remove(book2);
 
             }

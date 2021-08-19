@@ -17,20 +17,17 @@ public class Cart implements Manage {
 
     @Override
     public void add(Object object) {
-        // TODO Auto-generated method stub
         this.list.add((Book) object);
         
     }
 
     @Override
     public void remove(Object object) {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
-    public Iterator search(Object object) {
-        // TODO Auto-generated method stub
+    public Iterator<Book> search(Object object) {
         return null;
     }
 
