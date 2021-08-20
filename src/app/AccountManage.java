@@ -28,7 +28,13 @@ public class AccountManage implements Manage {
         }
     }
 
-    
+    public void napTien(Account accounts, double soTien) {
+        for (Account account : listAccounts) {
+            if (account.check(accounts)) {
+                account.setBalance(account.getBalance() + soTien);
+            }
+        }
+    }
 
     @Override
     public Iterator<Account> search(Object object) {

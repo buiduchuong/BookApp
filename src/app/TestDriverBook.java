@@ -31,14 +31,14 @@ public class TestDriverBook {
             switch (number) {
                 case 1:
                     Account account = nhap();
-                    if (Login.login(account, accountManage)) {
+                    if (Login.singIn(account, accountManage)) {
                         Iterator<Account> iterator = accountManage.search(account);
                         Account account2 = (Account) iterator.next();
                         String str = "admin";
                         int i = accountManage.getList().indexOf(account2);
                         if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
 
-                            customerFunction(inventoryManage, cartManage);
+                            customerFunction(inventoryManage, cartManage, accountManage,account);
                         } else {
 
                             managerFunction(accountManage, inventoryManage);
@@ -145,7 +145,7 @@ public class TestDriverBook {
         }
     }
 
-    public static void customerFunction(Manage inventory, Manage cart) {
+    public static void customerFunction(Manage inventory, Manage cart, Manage accountManage,Account accounts) {
         boolean check = true;
         while (check) {
 
@@ -153,6 +153,7 @@ public class TestDriverBook {
             System.out.println("2. Search book");
             System.out.println("3. Add books to cart");
             System.out.println("4. View cart books list");
+            System.out.println("5. Nap tien vao tai khoan");
             System.out.println("0. Log out");
             switch (sc.nextInt()) {
                 case 1:
@@ -179,6 +180,9 @@ public class TestDriverBook {
                     break;
                 case 4:
                     cart.inDS();
+                    break;
+                case 5:
+                    ((AccountManage) accountManage).napTien(accounts, 574.4);
                     break;
 
                 default:
