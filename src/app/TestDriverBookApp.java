@@ -13,7 +13,7 @@ public class TestDriverBookApp {
         QuanLy inventoryManage, accountManage, cartManage;
         inventoryManage = new Inventory();
         accountManage = new AccountManage();
-        cartManage = new Cart();
+        cartManage = new Cart(inventoryManage);
 
         try {
             khoiTaoDS(inventoryManage, accountManage);

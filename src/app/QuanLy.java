@@ -50,7 +50,7 @@ public abstract class QuanLy {
         return lAccounts.iterator();
     }
 
-   protected void inDS() {
+    protected void inDS() {
         for (Object object : list) {
             if (object instanceof Account) {
                 Account account = (Account) object;
