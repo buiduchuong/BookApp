@@ -22,8 +22,8 @@ public class TestDriverBookApp {
         }
 
         while (true) {
-            System.out.println("1. Sign in");
-            System.out.println("2. Sign up");
+            System.out.println("1. dang nhap");
+            System.out.println("2. dang ky");
             int number = sc.nextInt();
             sc.nextLine();
             switch (number) {
@@ -94,12 +94,12 @@ public class TestDriverBookApp {
         boolean check = true;
         while (check) {
 
-            System.out.println("1. View the list of accounts");
-            System.out.println("2. Search account");
-            System.out.println("3. Delete the account");
-            System.out.println("4. Add books to inventory");
-            System.out.println("5. Delete books to inventory");
-            System.out.println("6. View inventory books list to inventory");
+            System.out.println("1. xem danh sach tai khoan");
+            System.out.println("2. tim tai khoan");
+            System.out.println("3. xoa tai khoan");
+            System.out.println("4. them sach vao trong kho");
+            System.out.println("5. xoa sach khoi kho");
+            System.out.println("6. xem danh sach kho");
             System.out.println("0. Log out");
 
             switch (sc.nextInt()) {
@@ -147,10 +147,10 @@ public class TestDriverBookApp {
         boolean check = true;
         while (check) {
 
-            System.out.println("1. View inventory books list");
-            System.out.println("2. Search book");
-            System.out.println("3. Add books to cart");
-            System.out.println("4. View cart books list");
+            System.out.println("1. xem danh sach ");
+            System.out.println("2. tim sach");
+            System.out.println("3. them sach vao gio do");
+            System.out.println("4. xem danh saach gio do");
             System.out.println("5. Nap tien vao tai khoan");
             System.out.println("0. Log out");
             switch (sc.nextInt()) {
