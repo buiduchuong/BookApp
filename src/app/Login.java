@@ -1,13 +1,12 @@
 package app;
 
 import java.util.Iterator;
-import app.interfaces.Manage;
 
 public class Login {
-    public static boolean singIn(Account account1, Manage accountManage) {
-        Iterator<Account> i = accountManage.getList().iterator();
+    public static boolean singIn(Account account1, QuanLy accountManage) {
+        Iterator<Object> i = accountManage.list.iterator();
         while (i.hasNext()) {
-            Account account = i.next();
+            Account account = (Account) i.next();
             if (account.check(account1)) {
                 return true;
             }
@@ -15,8 +14,7 @@ public class Login {
         return false;
     }
 
-    public static void signUp(Account account, Manage acountManage) {
+    public static void signUp(Account account, QuanLy acountManage) {
         acountManage.add(account);
     }
-
 }

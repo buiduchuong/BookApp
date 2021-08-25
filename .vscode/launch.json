@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch TestDriverBookApp",
+            "request": "launch",
+            "mainClass": "app.TestDriverBookApp",
+            "projectName": "BookApp_deeaa8a"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

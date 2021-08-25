@@ -12,13 +12,13 @@ public class Book {
     public Book() {
     }
 
+    public Book(int maSach) {
+        this.maSach = maSach;
+    }
+
     public Book(int maSach, String tenSach) {
         this.maSach = maSach;
         this.tenSach = tenSach;
-    }
-
-    public Book(int maSach) {
-        this.maSach = maSach;
     }
 
     public Book(int maSach, String tenSach, String tacGia, Date ngayPhatHanh, double donGia, int soluong) {

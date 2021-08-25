@@ -5,14 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import app.interfaces.Manage;
-
-public class TestDriverBook {
+public class TestDriverBookApp {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        Manage inventoryManage, accountManage, cartManage;
+        QuanLy inventoryManage, accountManage, cartManage;
         inventoryManage = new Inventory();
         accountManage = new AccountManage();
         cartManage = new Cart();
@@ -32,13 +30,13 @@ public class TestDriverBook {
                 case 1:
                     Account account = nhap();
                     if (Login.singIn(account, accountManage)) {
-                        Iterator<Account> iterator = accountManage.search(account);
+                        Iterator<Object> iterator = accountManage.search(account);
                         Account account2 = (Account) iterator.next();
                         String str = "admin";
-                        int i = accountManage.getList().indexOf(account2);
-                        if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
+                        int i = accountManage.list.indexOf(account2);
+                        if (!str.equals(((Account) accountManage.list.get(i)).getAccount())) {
 
-                            customerFunction(inventoryManage, cartManage, accountManage,account);
+                            customerFunction(inventoryManage, cartManage, accountManage, account);
                         } else {
 
                             managerFunction(accountManage, inventoryManage);
@@ -66,7 +64,7 @@ public class TestDriverBook {
         return new Account(account1, password);
     }
 
-    public static void khoiTaoDS(Manage inventory, Manage accountManage) throws ParseException {
+    public static void khoiTaoDS(QuanLy inventory, QuanLy accountManage) throws ParseException {
 
         inventory.add(new Book(2291, "Đắc nhân tâm", "Dale Carnegie",
                 new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 50, 2));
@@ -92,7 +90,7 @@ public class TestDriverBook {
 
     }
 
-    public static void managerFunction(Manage accountManage, Manage inventory) {
+    public static void managerFunction(QuanLy accountManage, QuanLy inventory) {
         boolean check = true;
         while (check) {
 
@@ -109,7 +107,7 @@ public class TestDriverBook {
                     accountManage.inDS();
                     break;
                 case 2:
-                    Iterator<Account> iterator = accountManage.search(new Account("a", "ac"));
+                    Iterator<Object> iterator = accountManage.search(new Account("a", "ac"));
                     if (iterator.hasNext()) {
                         while (iterator.hasNext()) {
                             Account account = (Account) iterator.next();
@@ -145,7 +143,7 @@ public class TestDriverBook {
         }
     }
 
-    public static void customerFunction(Manage inventory, Manage cart, Manage accountManage,Account accounts) {
+    public static void customerFunction(QuanLy inventory, QuanLy cart, QuanLy accountManage, Account accounts) {
         boolean check = true;
         while (check) {
 
@@ -161,7 +159,7 @@ public class TestDriverBook {
 
                     break;
                 case 2:
-                    Iterator<Book> iterator = inventory.search(new Book(2291, "Đắc nhân tâm"));
+                    Iterator<Object> iterator = inventory.search(new Book(2291, "Đắc nhân tâm"));
                     if (iterator.hasNext()) {
                         while (iterator.hasNext()) {
                             Book book2 = (Book) iterator.next();
@@ -175,14 +173,14 @@ public class TestDriverBook {
                     System.out.println("Nhap ma sach can them vao gio do");
                     int maSach = sc.nextInt();
 
-                    ((Inventory) inventory).addBookCart(new Book(maSach), cart);
+                    cart.add(new Book(maSach));
 
                     break;
                 case 4:
                     cart.inDS();
                     break;
                 case 5:
-                    ((AccountManage) accountManage).napTien(accounts, 574.4);
+                    // ((AccountManage) accountManage).napTien(accounts, 574.4);
                     break;
 
                 default:
