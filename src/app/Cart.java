@@ -34,10 +34,10 @@ public class Cart extends QuanLy {
 
         int index = 1;
         if (this.list.isEmpty()) {
-            super.add(new Book(((Book) object).getMaSach(), ((Book) object).getTenSach(), ((Book) object).getTacGia(),
-                    ((Book) object).getNgayPhatHanh(), ((Book) object).getDonGia(), index));
+            super.add(new Book(((Book) object).getMaSach(), ((Book) object).getTenSach(),
+                    ((Book) object).getNhaXuatBan(), ((Book) object).getNgayPhatHanh(), ((Book) object).getDonGia(),
+                    index, ((Book) object).getTacGia(), ((Book) object).getTheLoai()));
             System.out.println("add successful");
-            System.out.println("3");
 
         } else {
             boolean check = true;
@@ -48,21 +48,37 @@ public class Cart extends QuanLy {
                     index++;
                     ((Book) list.get(list.indexOf(book))).setSoluong(index);
                     System.out.println("add successful");
-                    System.out.println("1");
                     check = false;
                 }
             }
             if (check) {
 
-                super.add(
-                        new Book(((Book) object).getMaSach(), ((Book) object).getTenSach(), ((Book) object).getTacGia(),
-                                ((Book) object).getNgayPhatHanh(), ((Book) object).getDonGia(), index));
+                super.add(new Book(((Book) object).getMaSach(), ((Book) object).getTenSach(),
+                        ((Book) object).getNhaXuatBan(), ((Book) object).getNgayPhatHanh(), ((Book) object).getDonGia(),
+                        index, ((Book) object).getTacGia(), ((Book) object).getTheLoai()));
                 System.out.println("add successful");
-                System.out.println("2");
             }
-
         }
-        // super.add(object);
+    }
+
+    public double tongTien() {
+        double tongTien = 0;
+
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Book book = (Book) iterator.next();
+            tongTien += book.getDonGia() * book.getSoluong();
+        }
+        return tongTien;
+    }
+
+    public void removeAll() {
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Book book = (Book) iterator.next();
+            iterator.remove();
+        }
+
     }
 
     @Override

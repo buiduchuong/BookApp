@@ -20,14 +20,22 @@ public class Account {
     }
 
     public boolean check(Account account) {
-        if (!account.getAccount().equals(this.account)) {
+        if (!account.getAccount().equals(this.account) || account.getAccount() == null
+                || account.getAccount().equals("")) {
             return false;
         }
-        if (!account.getPassword().equals(this.password)) {
+        if (!account.getPassword().equals(this.password) || account.getPassword() == null
+                || account.getPassword().equals("")) {
             return false;
         }
         return true;
     }
+
+    public double congTien(double soTien) {
+        return this.balance += soTien;
+    }
+
+    
 
     @Override
     public String toString() {

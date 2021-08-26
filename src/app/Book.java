@@ -4,10 +4,12 @@ import java.util.Date;
 
 public class Book {
     private int maSach;
-    private String tenSach, tacGia, nhaXuatBan;
+    private String tenSach, nhaXuatBan;
     private Date ngayPhatHanh;
     private double donGia;
     private int soluong;
+    private TacGia tacGia;
+    private TheLoai theLoai;
 
     public Book() {
     }
@@ -21,14 +23,16 @@ public class Book {
         this.tenSach = tenSach;
     }
 
-    public Book(int maSach, String tenSach, String tacGia, Date ngayPhatHanh, double donGia, int soluong) {
+    public Book(int maSach, String tenSach, String nhaXuatBan, Date ngayPhatHanh, double donGia, int soluong,
+            TacGia tacGia, TheLoai theLoai) {
         this.maSach = maSach;
         this.tenSach = tenSach;
-        this.tacGia = tacGia;
+        this.nhaXuatBan = nhaXuatBan;
         this.ngayPhatHanh = ngayPhatHanh;
         this.donGia = donGia;
         this.soluong = soluong;
-
+        this.tacGia = tacGia;
+        this.theLoai = theLoai;
     }
 
     public boolean check(Book book) {
@@ -38,11 +42,14 @@ public class Book {
 
         return true;
     }
+  
+       
 
     @Override
     public String toString() {
         return "Book [donGia=" + donGia + ", maSach=" + maSach + ", ngayPhatHanh=" + ngayPhatHanh + ", nhaXuatBan="
-                + nhaXuatBan + ", soluong=" + soluong + ", tacGia=" + tacGia + ", tenSach=" + tenSach + "]";
+                + nhaXuatBan + ", soluong=" + soluong + ", tacGia=" + tacGia + ", tenSach=" + tenSach + ", theLoai="
+                + theLoai + "]";
     }
 
     public int getMaSach() {
@@ -59,14 +66,6 @@ public class Book {
 
     public void setTenSach(String tenSach) {
         this.tenSach = tenSach;
-    }
-
-    public String getTacGia() {
-        return tacGia;
-    }
-
-    public void setTacGia(String tacGia) {
-        this.tacGia = tacGia;
     }
 
     public Date getNgayPhatHanh() {
@@ -99,6 +98,22 @@ public class Book {
 
     public void setNhaXuatBan(String nhaXuatBan) {
         this.nhaXuatBan = nhaXuatBan;
+    }
+
+    public TacGia getTacGia() {
+        return tacGia;
+    }
+
+    public void setTacGia(TacGia tacGia) {
+        this.tacGia = tacGia;
+    }
+
+    public TheLoai getTheLoai() {
+        return theLoai;
+    }
+
+    public void setTheLoai(TheLoai theLoai) {
+        this.theLoai = theLoai;
     }
 
 }
