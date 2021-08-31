@@ -31,15 +31,16 @@ public class Account {
         return true;
     }
 
-    public double congTien(double soTien) {
-        return this.balance += soTien;
+    public boolean check(double soTien) {
+        if (soTien < 50000) {
+            return false;
+        }
+        return true;
     }
-
-    
 
     @Override
     public String toString() {
-        return "Account [account=" + account + ", balance=" + balance + "$" + ", password=" + password + "]";
+        return "Account [account=" + account + ", balance=" + balance + ", password=" + password + "]";
     }
 
     public String getAccount() {

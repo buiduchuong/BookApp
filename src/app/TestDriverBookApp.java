@@ -65,33 +65,31 @@ public class TestDriverBookApp {
     }
 
     public static void khoiTaoDS(QuanLy inventory, QuanLy accountManage) throws ParseException {
-        // new Book(maSach, tenSach, nhaXuatBan, ngayPhatHanh, donGia, soluong, tacGia,
-        // theLoai)
 
         inventory.add(new Book(123, "To Kill a Mockingbird", "Kim Dong",
                 new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 100000, 2,
-                new TacGia("Nguyen Ngoc Chien", "18/3/1998", "Ho Chi Minh"), TheLoai.TIEUTHUYET));
+                new Author("Nguyen Ngoc Chien", "18/3/1998", "Ho Chi Minh"), Category.TIEUTHUYET));
         inventory.add(
                 new Book(124, "Anna Karenina", "Andrew Matthews", new SimpleDateFormat("dd/MM/yyy").parse("23/09/1998"),
-                        170000, 50, new TacGia("Ngyen Ngoc Nga", "22/9/1977", "Ha Noi"), TheLoai.VANHOC_NGHETHUAT));
+                        170000, 50, new Author("Ngyen Ngoc Nga", "22/9/1977", "Ha Noi"), Category.VANHOC_NGHETHUAT));
         inventory.add(new Book(542, "The Great Gatsby", "Thanh Nien",
                 new SimpleDateFormat("dd/MM/yyy").parse("1/1/2004"), 300000, 99,
-                new TacGia("Nguyen Viet Trung", "22/12/1977", "Da Nang"), TheLoai.VANHOC_NGHETHUAT));
+                new Author("Nguyen Viet Trung", "22/12/1977", "Da Nang"), Category.VANHOC_NGHETHUAT));
         inventory.add(
                 new Book(423, "A Passage to India", "Lao Dong", new SimpleDateFormat("dd/MM/yyy").parse("22/8/1995"),
-                        125000, 120, new TacGia("Nguyen Ngoc Anh", "29/1/2001", "HCM"), TheLoai.GIAOTRINH));
+                        125000, 120, new Author("Nguyen Ngoc Anh", "29/1/2001", "HCM"), Category.GIAOTRINH));
         inventory.add(new Book(657, "Invisible Man", "J K Rowling", new SimpleDateFormat("dd/MM/yyy").parse("8/7/2007"),
-                248000, 13, new TacGia("Nguyen Van Thanh", "13/3/1993", "New York"), TheLoai.KHCN_KINHTE));
+                248000, 13, new Author("Nguyen Van Thanh", "13/3/1993", "New York"), Category.KHCN_KINHTE));
         inventory
                 .add(new Book(56756, "Don Quixote", "Og Mandino", new SimpleDateFormat("dd/MM/yyy").parse("25/10/1998"),
-                        131000, 11, new TacGia("nguyen Minh Dung", "24/04/1994", "Dak Lak"), TheLoai.THIEUNHI));
+                        131000, 11, new Author("nguyen Minh Dung", "24/04/1994", "Dak Lak"), Category.THIEUNHI));
         inventory.add(new Book(657, "Beloved", "Meredith McIver ", new SimpleDateFormat("dd/MM/yyy").parse("27/9/1989"),
-                115000, 93, new TacGia("Parkstone Press", "18/09/1956", "LONDON"), TheLoai.VANHOC_NGHETHUAT));
+                115000, 93, new Author("Parkstone Press", "18/09/1956", "LONDON"), Category.VANHOC_NGHETHUAT));
         inventory.add(new Book(344, "Bollywood", "J. D. Salinger", new SimpleDateFormat("dd/MM/yyy").parse("2/3/1992"),
-                90000, 29, new TacGia("Nguyen Ngoc Ha", "13/2/1988", "Singapo"), TheLoai.THIEUNHI));
+                90000, 29, new Author("Nguyen Ngoc Ha", "13/2/1988", "Singapo"), Category.THIEUNHI));
         inventory
                 .add(new Book(331, "Thomas Jefferson", "Hemingway", new SimpleDateFormat("dd/MM/yyy").parse("3/4/2001"),
-                        30000, 82, new TacGia("Thomas Jefferson", "9/12/1977", "Lao"), TheLoai.CHINHTRI_PHAPLUAT));
+                        30000, 82, new Author("Thomas Jefferson", "9/12/1977", "Lao"), Category.CHINHTRI_PHAPLUAT));
 
         accountManage.add(new Account("a12345", "ac"));
         accountManage.add(new Account("b", "ac"));
@@ -130,9 +128,9 @@ public class TestDriverBookApp {
                     break;
                 case 4:
                     try {
-                        inventory.add(
-                                new Book(3391, "Java 102", "MJ", new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"),
-                                        120000, 3, new TacGia("JavSOn", "18/11/1921", "AC"), TheLoai.VANHOC_NGHETHUAT));
+                        inventory.add(new Book(3391, "Java 102", "MJ",
+                                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 120000, 3,
+                                new Author("JavSOn", "18/11/1921", "AC"), Category.VANHOC_NGHETHUAT));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -154,9 +152,11 @@ public class TestDriverBookApp {
 
     public static void customerFunction(QuanLy inventory, QuanLy cart, QuanLy accountManage, Account accounts) {
         boolean check = true;
+        ((Inventory) inventory).inDSS();
+        System.out.println();
         while (check) {
 
-            System.out.println("1. xem danh sach ");
+            System.out.println("1. xem them sach ");
             System.out.println("2. tim sach");
             System.out.println("3. them sach vao gio do");
             System.out.println("4. xem danh saach gio do");
@@ -170,7 +170,8 @@ public class TestDriverBookApp {
 
                     break;
                 case 2:
-                    Iterator<Object> iterator = inventory.search(new Book(2291, "Đắc nhân tâm"));
+
+                    Iterator<Object> iterator = ((Inventory) inventory).search(new Book(Category.CHINHTRI_PHAPLUAT));
                     if (iterator.hasNext()) {
                         while (iterator.hasNext()) {
                             Book book2 = (Book) iterator.next();
@@ -200,12 +201,12 @@ public class TestDriverBookApp {
                     break;
                 case 6:
                     ((AccountManage) accountManage).xemSoDu(accounts);
+                    System.out.println();
                     break;
                 case 7:
                     if (((AccountManage) accountManage).thanhToan(cart, accounts)) {
                         System.out.println("Thanh toan thanh cong");
 
-                        ((Cart) cart).removeAll();
                     } else {
                         System.out.println("so du khong du, vui long nap tien !!!");
                     }
@@ -216,5 +217,38 @@ public class TestDriverBookApp {
                     break;
             }
         }
+    }
+
+    public static Category theloai() {
+        Category category;
+        System.out.println("1- Chinh tri phap luat, 2- Giao trinh, 3- Khoa hoc cong nghe kinh te,4- Thieu nhi");
+        System.out.println("4- Van hoc nghe thuat, 5- xa hoi lich su");
+        switch (sc.nextInt()) {
+            case 1:
+                category = Category.CHINHTRI_PHAPLUAT;
+                break;
+            case 2:
+                category = Category.GIAOTRINH;
+                break;
+            case 3:
+                category = Category.KHCN_KINHTE;
+                break;
+            case 4:
+                category = Category.THIEUNHI;
+                break;
+            case 5:
+                category = Category.TIEUTHUYET;
+                break;
+            case 6:
+                category = Category.VANHOC_NGHETHUAT;
+                break;
+            case 7:
+                category = Category.XAHOI_LICHSU;
+                break;
+
+            default:
+                break;
+        }
+        return Category.CHINHTRI_PHAPLUAT;
     }
 }

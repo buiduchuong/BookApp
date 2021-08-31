@@ -1,29 +1,29 @@
 package app;
 
-public class KhachHang {
-    private int maKH;
+import java.util.Scanner;
+
+public class CustomerInfo {
     private String hoTen;
     private String diaChi;
     private int sdt;
-    private Account account;
+    private Scanner sc = new Scanner(System.in);
 
-    public KhachHang(int maKH, String hoTen, String diaChi, int sdt) {
-        this.maKH = maKH;
+    public CustomerInfo() {
+    }
+
+    public CustomerInfo(String hoTen, String diaChi, int sdt) {
         this.hoTen = hoTen;
         this.diaChi = diaChi;
         this.sdt = sdt;
     }
 
-    public void napTien(Double soTien) {
- //       account.napTien(soTien);
-    }
-
-    public int getMaKH() {
-        return maKH;
-    }
-
-    public void setMaKH(int maKH) {
-        this.maKH = maKH;
+    public void nhap() {
+        System.out.println("nhap ho ten: ");
+        this.hoTen = sc.nextLine();
+        System.out.println("Nhap dia chi: ");
+        this.diaChi = sc.nextLine();
+        System.out.println("Nhap so dien thoai: ");
+        this.sdt = sc.nextInt();
     }
 
     public String getHoTen() {

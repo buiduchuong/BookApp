@@ -8,8 +8,8 @@ public class Book {
     private Date ngayPhatHanh;
     private double donGia;
     private int soluong;
-    private TacGia tacGia;
-    private TheLoai theLoai;
+    private Author tacGia;
+    private Category theLoai;
 
     public Book() {
     }
@@ -23,8 +23,12 @@ public class Book {
         this.tenSach = tenSach;
     }
 
+    public Book(Category theLoai) {
+        this.theLoai = theLoai;
+    }
+
     public Book(int maSach, String tenSach, String nhaXuatBan, Date ngayPhatHanh, double donGia, int soluong,
-            TacGia tacGia, TheLoai theLoai) {
+            Author tacGia, Category theLoai) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.nhaXuatBan = nhaXuatBan;
@@ -42,8 +46,13 @@ public class Book {
 
         return true;
     }
-  
-       
+
+    public boolean check(Category category) {
+        if (category != this.theLoai) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public String toString() {
@@ -100,19 +109,19 @@ public class Book {
         this.nhaXuatBan = nhaXuatBan;
     }
 
-    public TacGia getTacGia() {
+    public Author getTacGia() {
         return tacGia;
     }
 
-    public void setTacGia(TacGia tacGia) {
+    public void setTacGia(Author tacGia) {
         this.tacGia = tacGia;
     }
 
-    public TheLoai getTheLoai() {
+    public Category getTheLoai() {
         return theLoai;
     }
 
-    public void setTheLoai(TheLoai theLoai) {
+    public void setTheLoai(Category theLoai) {
         this.theLoai = theLoai;
     }
 

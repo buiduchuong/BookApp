@@ -1,15 +1,14 @@
 package app;
 
-public class TacGia {
+public class Author {
     private String hoten;
     private String ngaysinh;
     private String diachi;
-    private int maTacGia;
 
-    public TacGia() {
+    public Author() {
     }
 
-    public TacGia(String hoten, String ngaysinh, String diachi) {
+    public Author(String hoten, String ngaysinh, String diachi) {
         this.hoten = hoten;
         this.ngaysinh = ngaysinh;
         this.diachi = diachi;

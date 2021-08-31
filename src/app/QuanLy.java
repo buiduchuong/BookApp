@@ -42,8 +42,14 @@ public abstract class QuanLy {
                 }
             } else {
                 Book book = (Book) i.next();
-                if (book.check((Book) object)) {
-                    lAccounts.add(book);
+                if (((Book) object).getTheLoai() == null) {
+                    if (book.check((Book) object)) {
+                        lAccounts.add(book);
+                    }
+                }else{
+                    if (book.check(((Book) object).getTheLoai())) {
+                        lAccounts.add(book);
+                    }
                 }
             }
         }

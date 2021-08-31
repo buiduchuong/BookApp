@@ -56,7 +56,7 @@ public class Cart extends QuanLy {
                 super.add(new Book(((Book) object).getMaSach(), ((Book) object).getTenSach(),
                         ((Book) object).getNhaXuatBan(), ((Book) object).getNgayPhatHanh(), ((Book) object).getDonGia(),
                         index, ((Book) object).getTacGia(), ((Book) object).getTheLoai()));
-                System.out.println("add successful");
+                System.out.println("add successfully");
             }
         }
     }

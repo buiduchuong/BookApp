@@ -29,19 +29,26 @@ public class AccountManage extends QuanLy {
     }
 
     public boolean napTien(double soTien, Account account) {
-        if (soTien < 50000) {
+        if (!account.check(soTien)) {
             return false;
         }
         for (Object object : list) {
 
             if (account.check((Account) object)) {
-                ((Account) object).setBalance(((Account) object).getBalance() + account.congTien(soTien));
+                ((Account) object).setBalance(((Account) object).getBalance() + soTien);
             }
         }
+
         return true;
     }
 
     public boolean thanhToan(QuanLy cart, Account account) {
+        CustomerInfo customerInfo = new CustomerInfo();
+        System.out.println("danh sach mua hang");
+        cart.inDS();
+        System.out.println();
+        System.out.println();
+        System.out.println("tong tien la: " + ((Cart) cart).tongTien());
         boolean check = true;
 
         for (Object object : list) {
@@ -51,6 +58,8 @@ public class AccountManage extends QuanLy {
                     check = false;
                 } else {
                     ((Account) object).setBalance(((Account) object).getBalance() - ((Cart) cart).tongTien());
+                    ((Cart) cart).removeAll();
+                    customerInfo.nhap();
                 }
 
             }
@@ -61,7 +70,7 @@ public class AccountManage extends QuanLy {
     public void xemSoDu(Account account) {
         for (Object object : list) {
             if (account.check((Account) object)) {
-                System.out.println("so du tai khoan la: " + ((Account) object).getBalance());
+                System.out.printf("so du tai khoan la: " + ((Account) object).getBalance());
 
             }
         }
