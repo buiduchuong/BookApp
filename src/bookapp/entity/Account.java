@@ -1,4 +1,4 @@
-package app;
+package bookapp.entity;
 
 public class Account {
     private String account, password;

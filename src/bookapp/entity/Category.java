@@ -1,4 +1,4 @@
-package app;
+package bookapp.entity;
 
 public enum Category {
     CHINHTRI_PHAPLUAT, KHCN_KINHTE, VANHOC_NGHETHUAT, GIAOTRINH, XAHOI_LICHSU, TIEUTHUYET, THIEUNHI 

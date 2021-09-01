@@ -1,32 +1,32 @@
-package app;
+package bookapp.control;
 
 import java.util.Iterator;
 
 public class Inventory extends QuanLy {
 
     @Override
-    protected void add(Object object) {
+    public void add(Object object) {
         super.add(object);
     }
 
     @Override
-    protected void remove(Object object) {
+    public void remove(Object object) {
         super.remove(object);
     }
 
     @Override
-    protected Iterator<Object> search(Object object) {
+    public Iterator<Object> search(Object object) {
         return super.search(object);
     }
 
     @Override
-    protected void inDS() {
+    public void inDS() {
         super.inDS();
     }
 
     public void inDSS() {
         for (int i = 0; i < 4; i++) {
-            System.out.println(list.get(i).toString());
+            System.out.println(getList().get(i).toString());
         }
     }
 

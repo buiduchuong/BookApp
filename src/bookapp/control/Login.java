@@ -1,10 +1,11 @@
-package app;
+package bookapp.control;
 
 import java.util.Iterator;
+import bookapp.entity.*;
 
 public class Login {
     public static boolean singIn(Account account1, QuanLy accountManage) {
-        Iterator<Object> i = accountManage.list.iterator();
+        Iterator<Object> i = accountManage.getList().iterator();
         while (i.hasNext()) {
             Account account = (Account) i.next();
             if (account.check(account1)) {
@@ -15,7 +16,7 @@ public class Login {
     }
 
     public static void signUp(Account account, QuanLy acountManage) {
-        Iterator<Object> i = acountManage.list.iterator();
+        Iterator<Object> i = acountManage.getList().iterator();
         while (i.hasNext()) {
             Account account1 = (Account) i.next();
             if (account.check(account1)) {

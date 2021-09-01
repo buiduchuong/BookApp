@@ -1,19 +1,24 @@
-package app;
+package bookapp.boundary;
 
+import bookapp.control.*;
+import bookapp.entity.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Scanner;
+
 
 public class TestDriverBookApp {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        QuanLy inventoryManage, accountManage, cartManage;
+        CustomerInfo customerInfo = new CustomerInfo();
+        QuanLy inventoryManage, accountManage, cartManage, billManage;
         inventoryManage = new Inventory();
         accountManage = new AccountManage();
         cartManage = new Cart(inventoryManage);
+        billManage = new BillManage();
 
         try {
             khoiTaoDS(inventoryManage, accountManage);
@@ -33,13 +38,14 @@ public class TestDriverBookApp {
                         Iterator<Object> iterator = accountManage.search(account);
                         Account account2 = (Account) iterator.next();
                         String str = "admin";
-                        int i = accountManage.list.indexOf(account2);
-                        if (!str.equals(((Account) accountManage.list.get(i)).getAccount())) {
+                        int i = accountManage.getList().indexOf(account2);
+                        if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
 
-                            customerFunction(inventoryManage, cartManage, accountManage, account);
+                            customerFunction(inventoryManage, (Cart) cartManage, accountManage, account, customerInfo,
+                                    billManage);
                         } else {
 
-                            managerFunction(accountManage, inventoryManage);
+                            managerFunction(accountManage, inventoryManage, billManage);
 
                         }
 
@@ -96,7 +102,7 @@ public class TestDriverBookApp {
 
     }
 
-    public static void managerFunction(QuanLy accountManage, QuanLy inventory) {
+    public static void managerFunction(QuanLy accountManage, QuanLy inventory, QuanLy billManage) {
         boolean check = true;
         while (check) {
 
@@ -106,6 +112,7 @@ public class TestDriverBookApp {
             System.out.println("4. them sach vao trong kho");
             System.out.println("5. xoa sach khoi kho");
             System.out.println("6. xem danh sach kho");
+            System.out.println("7. xem hoa don");
             System.out.println("0. Log out");
 
             switch (sc.nextInt()) {
@@ -142,6 +149,9 @@ public class TestDriverBookApp {
                 case 6:
                     inventory.inDS();
                     break;
+                case 7:
+                    billManage.inDS();
+                    break;
                 default:
                     check = false;
                     sc.nextLine();
@@ -150,7 +160,8 @@ public class TestDriverBookApp {
         }
     }
 
-    public static void customerFunction(QuanLy inventory, QuanLy cart, QuanLy accountManage, Account accounts) {
+    public static void customerFunction(QuanLy inventory, Cart cart, QuanLy accountManage, Account accounts,
+            CustomerInfo customerInfo, QuanLy billManage) {
         boolean check = true;
         ((Inventory) inventory).inDSS();
         System.out.println();
@@ -164,7 +175,9 @@ public class TestDriverBookApp {
             System.out.println("6. Xem so du tai khoan");
             System.out.println("7. Thanh toan sach trong gio do");
             System.out.println("0. Log out");
-            switch (sc.nextInt()) {
+            int number = sc.nextInt();
+            sc.nextLine();
+            switch (number) {
                 case 1:
                     inventory.inDS();
 
@@ -204,9 +217,22 @@ public class TestDriverBookApp {
                     System.out.println();
                     break;
                 case 7:
-                    if (((AccountManage) accountManage).thanhToan(cart, accounts)) {
+                    Payment payment = new Payment(cart, customerInfo);
+                    if (payment.thanhToan(accounts, accountManage, billManage)) {
+                        System.out.println("danh sach mua hang");
+                        cart.inDS();
+                        System.out.println();
+                        System.out.println();
+                        System.out.println("tong tien la: " + ((Cart) cart).tongTien());
+                        System.out.println("nhap ho ten: ");
+                        String hoTen = sc.nextLine();
+                        System.out.println("Nhap dia chi: ");
+                        String diaChi = sc.nextLine();
+                        System.out.println("Nhap so dien thoai: ");
+                        int sdt = sc.nextInt();
                         System.out.println("Thanh toan thanh cong");
-
+                        billManage.add(new Bill(cart, new CustomerInfo(hoTen, diaChi, sdt)));
+                        cart.removeAll();
                     } else {
                         System.out.println("so du khong du, vui long nap tien !!!");
                     }
@@ -216,39 +242,7 @@ public class TestDriverBookApp {
                     sc.nextLine();
                     break;
             }
-        }
-    }
 
-    public static Category theloai() {
-        Category category;
-        System.out.println("1- Chinh tri phap luat, 2- Giao trinh, 3- Khoa hoc cong nghe kinh te,4- Thieu nhi");
-        System.out.println("4- Van hoc nghe thuat, 5- xa hoi lich su");
-        switch (sc.nextInt()) {
-            case 1:
-                category = Category.CHINHTRI_PHAPLUAT;
-                break;
-            case 2:
-                category = Category.GIAOTRINH;
-                break;
-            case 3:
-                category = Category.KHCN_KINHTE;
-                break;
-            case 4:
-                category = Category.THIEUNHI;
-                break;
-            case 5:
-                category = Category.TIEUTHUYET;
-                break;
-            case 6:
-                category = Category.VANHOC_NGHETHUAT;
-                break;
-            case 7:
-                category = Category.XAHOI_LICHSU;
-                break;
-
-            default:
-                break;
         }
-        return Category.CHINHTRI_PHAPLUAT;
     }
 }

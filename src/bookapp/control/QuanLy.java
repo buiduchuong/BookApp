@@ -1,21 +1,22 @@
-package app;
+package bookapp.control;
 
+import bookapp.entity.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public abstract class QuanLy {
-    protected List<Object> list;
+    private List<Object> list;
 
     public QuanLy() {
         this.list = new ArrayList<Object>();
     }
 
-    protected void add(Object object) {
+    public void add(Object object) {
         list.add(object);
     }
 
-    protected void remove(Object object) {
+    public void remove(Object object) {
         if (object instanceof Account) {
             for (Object account : list) {
                 if (((Account) account).check((Account) object)) {
@@ -31,7 +32,7 @@ public abstract class QuanLy {
         }
     }
 
-    protected Iterator<Object> search(Object object) {
+    public Iterator<Object> search(Object object) {
         List<Object> lAccounts = new ArrayList<Object>();
         Iterator<Object> i = list.iterator();
         while (i.hasNext()) {
@@ -46,7 +47,7 @@ public abstract class QuanLy {
                     if (book.check((Book) object)) {
                         lAccounts.add(book);
                     }
-                }else{
+                } else {
                     if (book.check(((Book) object).getTheLoai())) {
                         lAccounts.add(book);
                     }
@@ -56,15 +57,22 @@ public abstract class QuanLy {
         return lAccounts.iterator();
     }
 
-    protected void inDS() {
+    public void inDS() {
         for (Object object : list) {
             if (object instanceof Account) {
                 Account account = (Account) object;
                 System.out.println(account.toString());
+            } else if (object instanceof Bill) {
+                ((Bill) object).inDS();
             } else {
                 Book book = (Book) object;
                 System.out.println(book.toString());
             }
         }
     }
+
+    public List<Object> getList() {
+        return list;
+    }
+
 }

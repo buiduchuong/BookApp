@@ -1,5 +1,6 @@
-package app;
+package bookapp.control;
 
+import bookapp.entity.*;
 import java.util.Iterator;
 
 public class Cart extends QuanLy {
@@ -11,9 +12,9 @@ public class Cart extends QuanLy {
     }
 
     @Override
-    protected void add(Object object) {
+    public void add(Object object) {
 
-        Iterator<Object> i = inventory.list.iterator();
+        Iterator<Object> i = inventory.getList().iterator();
         while (i.hasNext()) {
             Book book2 = (Book) i.next();
             int amount = book2.getSoluong();
@@ -33,7 +34,7 @@ public class Cart extends QuanLy {
     private void add1(Object object) {
 
         int index = 1;
-        if (this.list.isEmpty()) {
+        if (this.getList().isEmpty()) {
             super.add(new Book(((Book) object).getMaSach(), ((Book) object).getTenSach(),
                     ((Book) object).getNhaXuatBan(), ((Book) object).getNgayPhatHanh(), ((Book) object).getDonGia(),
                     index, ((Book) object).getTacGia(), ((Book) object).getTheLoai()));
@@ -41,12 +42,12 @@ public class Cart extends QuanLy {
 
         } else {
             boolean check = true;
-            for (Object book : list) {
-                if ((((Book) list.get(list.indexOf(book))).getMaSach()) == ((Book) object).getMaSach()) {
+            for (Object book : getList()) {
+                if ((((Book) getList().get(getList().indexOf(book))).getMaSach()) == ((Book) object).getMaSach()) {
 
-                    index = ((Book) list.get(list.indexOf(book))).getSoluong();
+                    index = ((Book) getList().get(getList().indexOf(book))).getSoluong();
                     index++;
-                    ((Book) list.get(list.indexOf(book))).setSoluong(index);
+                    ((Book) getList().get(getList().indexOf(book))).setSoluong(index);
                     System.out.println("add successful");
                     check = false;
                 }
@@ -64,7 +65,7 @@ public class Cart extends QuanLy {
     public double tongTien() {
         double tongTien = 0;
 
-        Iterator iterator = list.iterator();
+        Iterator iterator = getList().iterator();
         while (iterator.hasNext()) {
             Book book = (Book) iterator.next();
             tongTien += book.getDonGia() * book.getSoluong();
@@ -73,26 +74,26 @@ public class Cart extends QuanLy {
     }
 
     public void removeAll() {
-        Iterator iterator = list.iterator();
+        Iterator iterator = getList().iterator();
         while (iterator.hasNext()) {
-            Book book = (Book) iterator.next();
+            iterator.next();
             iterator.remove();
         }
 
     }
 
     @Override
-    protected void remove(Object object) {
+    public void remove(Object object) {
         super.remove(object);
     }
 
     @Override
-    protected Iterator<Object> search(Object object) {
+    public Iterator<Object> search(Object object) {
         return super.search(object);
     }
 
     @Override
-    protected void inDS() {
+    public void inDS() {
         super.inDS();
     }
 

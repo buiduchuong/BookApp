@@ -1,4 +1,4 @@
-package app;
+package bookapp.entity;
 
 import java.util.Scanner;
 
@@ -15,15 +15,6 @@ public class CustomerInfo {
         this.hoTen = hoTen;
         this.diaChi = diaChi;
         this.sdt = sdt;
-    }
-
-    public void nhap() {
-        System.out.println("nhap ho ten: ");
-        this.hoTen = sc.nextLine();
-        System.out.println("Nhap dia chi: ");
-        this.diaChi = sc.nextLine();
-        System.out.println("Nhap so dien thoai: ");
-        this.sdt = sc.nextInt();
     }
 
     public String getHoTen() {
@@ -49,4 +40,10 @@ public class CustomerInfo {
     public void setSdt(int sdt) {
         this.sdt = sdt;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerInfo [diaChi=" + diaChi + ", hoTen=" + hoTen + ", sdt=" + sdt + "]";
+    }
+
 }

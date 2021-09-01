@@ -1,4 +1,4 @@
-package app;
+package bookapp.entity;
 
 import java.util.Date;
 
@@ -10,6 +10,7 @@ public class Book {
     private int soluong;
     private Author tacGia;
     private Category theLoai;
+    int a;
 
     public Book() {
     }
@@ -43,7 +44,6 @@ public class Book {
         if (book.getMaSach() != this.maSach) {
             return false;
         }
-
         return true;
     }
 

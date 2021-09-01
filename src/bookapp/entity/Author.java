@@ -1,4 +1,4 @@
-package app;
+package bookapp.entity;
 
 public class Author {
     private String hoten;
