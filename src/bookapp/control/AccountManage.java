@@ -36,7 +36,7 @@ public class AccountManage extends QuanLy {
         for (Object object : getList()) {
 
             if (account.check((Account) object)) {
-                ((Account) object).setBalance(((Account) object).getBalance() + soTien);
+                congTien((Account) object, soTien);
             }
         }
 
@@ -52,5 +52,12 @@ public class AccountManage extends QuanLy {
         }
 
     }
-    
+
+    private void congTien(Account account, double soTien) {
+        account.setBalance(account.getBalance() + soTien);
+    }
+
+    protected void truTien(Account account, double soTien) {
+        account.setBalance(account.getBalance() - soTien);
+    }
 }

@@ -41,7 +41,7 @@ public class TestDriverBookApp {
                         int i = accountManage.getList().indexOf(account2);
                         if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
 
-                            customerFunction(inventoryManage, (Cart) cartManage, accountManage, account, customerInfo,
+                            customerFunction(inventoryManage, (Cart) cartManage, (AccountManage) accountManage, account, customerInfo,
                                     billManage);
                         } else {
 
@@ -160,7 +160,7 @@ public class TestDriverBookApp {
         }
     }
 
-    public static void customerFunction(QuanLy inventory, Cart cart, QuanLy accountManage, Account accounts,
+    public static void customerFunction(QuanLy inventory, Cart cart, AccountManage accountManage, Account accounts,
             CustomerInfo customerInfo, QuanLy billManage) {
         boolean check = true;
         ((Inventory) inventory).inDSS();
@@ -217,13 +217,13 @@ public class TestDriverBookApp {
                     System.out.println();
                     break;
                 case 7:
-                    Payment payment = new Payment(cart, customerInfo);
-                    if (payment.thanhToan(accounts, accountManage, billManage)) {
+                    Payment payment = new Payment(cart);
+                    if (payment.thanhToan(accounts, accountManage)) {
                         System.out.println("danh sach mua hang");
                         cart.inDS();
                         System.out.println();
                         System.out.println();
-                        System.out.println("tong tien la: " + ((Cart) cart).tongTien());
+                        System.out.println("tong tien la: " + cart.tongTien());
                         System.out.println("nhap ho ten: ");
                         String hoTen = sc.nextLine();
                         System.out.println("Nhap dia chi: ");

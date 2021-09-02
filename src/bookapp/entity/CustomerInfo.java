@@ -1,12 +1,9 @@
 package bookapp.entity;
 
-import java.util.Scanner;
-
 public class CustomerInfo {
     private String hoTen;
     private String diaChi;
     private int sdt;
-    private Scanner sc = new Scanner(System.in);
 
     public CustomerInfo() {
     }

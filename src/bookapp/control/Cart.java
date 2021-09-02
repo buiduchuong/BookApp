@@ -5,39 +5,23 @@ import java.util.Iterator;
 
 public class Cart extends QuanLy {
 
-    QuanLy inventory;
+    Inventory inventory;
 
     public Cart(QuanLy inventory) {
-        this.inventory = inventory;
+        this.inventory = (Inventory) inventory;
     }
 
     @Override
     public void add(Object object) {
-
-        Iterator<Object> i = inventory.getList().iterator();
-        while (i.hasNext()) {
-            Book book2 = (Book) i.next();
-            int amount = book2.getSoluong();
-            if (amount < 1) {
-                System.out.println("Quyen sach nay da het");
-            } else {
-                if (((Book) object).check(book2)) {
-                    add1(book2);
-                    amount--;
-                    book2.setSoluong(amount);
-
-                }
-            }
-        }
+        add1(inventory.check((Book) object));
     }
 
-    private void add1(Object object) {
+    private void add1(Book object) {
 
         int index = 1;
         if (this.getList().isEmpty()) {
-            super.add(new Book(((Book) object).getMaSach(), ((Book) object).getTenSach(),
-                    ((Book) object).getNhaXuatBan(), ((Book) object).getNgayPhatHanh(), ((Book) object).getDonGia(),
-                    index, ((Book) object).getTacGia(), ((Book) object).getTheLoai()));
+            super.add(new Book(object.getMaSach(), object.getTenSach(), object.getNhaXuatBan(),
+                    object.getNgayPhatHanh(), object.getDonGia(), index, object.getTacGia(), object.getTheLoai()));
             System.out.println("add successful");
 
         } else {
@@ -54,9 +38,8 @@ public class Cart extends QuanLy {
             }
             if (check) {
 
-                super.add(new Book(((Book) object).getMaSach(), ((Book) object).getTenSach(),
-                        ((Book) object).getNhaXuatBan(), ((Book) object).getNgayPhatHanh(), ((Book) object).getDonGia(),
-                        index, ((Book) object).getTacGia(), ((Book) object).getTheLoai()));
+                super.add(new Book(object.getMaSach(), object.getTenSach(), object.getNhaXuatBan(),
+                        object.getNgayPhatHanh(), object.getDonGia(), index, object.getTacGia(), object.getTheLoai()));
                 System.out.println("add successfully");
             }
         }
@@ -64,7 +47,6 @@ public class Cart extends QuanLy {
 
     public double tongTien() {
         double tongTien = 0;
-
         Iterator iterator = getList().iterator();
         while (iterator.hasNext()) {
             Book book = (Book) iterator.next();

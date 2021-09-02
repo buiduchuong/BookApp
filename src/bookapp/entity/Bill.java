@@ -30,5 +30,4 @@ public class Bill {
         System.out.println("Tong tien la: " + this.price);
 
     }
-
 }

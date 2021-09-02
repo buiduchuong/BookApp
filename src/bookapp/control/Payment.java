@@ -3,15 +3,13 @@ package bookapp.control;
 import bookapp.entity.*;
 
 public class Payment {
-    private QuanLy cart;
-    private CustomerInfo customerInfo;
+    private Cart cart;
 
-    public Payment(QuanLy cart, CustomerInfo customerInfo) {
+    public Payment(Cart cart) {
         this.cart = cart;
-        this.customerInfo = customerInfo;
     }
 
-    public boolean thanhToan(Account account, QuanLy accountManage, QuanLy billManage) {
+    public boolean thanhToan(Account account, AccountManage accountManage) {
 
         boolean check = true;
 
@@ -21,7 +19,7 @@ public class Payment {
                 if (((Cart) cart).tongTien() > ((Account) object).getBalance()) {
                     check = false;
                 } else {
-                    ((Account) object).setBalance(((Account) object).getBalance() - ((Cart) cart).tongTien());
+                    accountManage.truTien((Account) object, cart.tongTien());
 
                 }
             }
@@ -29,21 +27,4 @@ public class Payment {
 
         return check;
     }
-
-    public QuanLy getCart() {
-        return cart;
-    }
-
-    public void setCart(QuanLy cart) {
-        this.cart = cart;
-    }
-
-    public CustomerInfo getCustomerInfo() {
-        return customerInfo;
-    }
-
-    public void setCustomerInfo(CustomerInfo customerInfo) {
-        this.customerInfo = customerInfo;
-    }
-
 }

@@ -15,8 +15,8 @@ public class Login {
         return false;
     }
 
-    public static void signUp(Account account, QuanLy acountManage) {
-        Iterator<Object> i = acountManage.getList().iterator();
+    public static void signUp(Account account, QuanLy accountManage) {
+        Iterator<Object> i = accountManage.getList().iterator();
         while (i.hasNext()) {
             Account account1 = (Account) i.next();
             if (account.check(account1)) {
@@ -24,6 +24,6 @@ public class Login {
                 return;
             }
         }
-        acountManage.add(account);
+        accountManage.add(account);
     }
 }

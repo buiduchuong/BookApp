@@ -19,13 +19,13 @@ public class Book {
         this.maSach = maSach;
     }
 
+    public Book(Category theLoai) {
+        this.theLoai = theLoai;
+    }
+
     public Book(int maSach, String tenSach) {
         this.maSach = maSach;
         this.tenSach = tenSach;
-    }
-
-    public Book(Category theLoai) {
-        this.theLoai = theLoai;
     }
 
     public Book(int maSach, String tenSach, String nhaXuatBan, Date ngayPhatHanh, double donGia, int soluong,

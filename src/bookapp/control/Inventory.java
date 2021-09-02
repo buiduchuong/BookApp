@@ -1,6 +1,7 @@
 package bookapp.control;
 
 import java.util.Iterator;
+import bookapp.entity.Book;
 
 public class Inventory extends QuanLy {
 
@@ -28,6 +29,24 @@ public class Inventory extends QuanLy {
         for (int i = 0; i < 4; i++) {
             System.out.println(getList().get(i).toString());
         }
+    }
+
+    protected Book check(Book book) {
+        Iterator<Object> i = getList().iterator();
+        while (i.hasNext()) {
+            Book book2 = (Book) i.next();
+            int amount = book2.getSoluong();
+            if (amount < 1) {
+                return null;
+            } else {
+                if (book.check(book)) {
+                    amount--;
+                    book2.setSoluong(amount);
+                    return book2;
+                }
+            }
+        }
+     return null;  
     }
 
 }

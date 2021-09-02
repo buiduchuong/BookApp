@@ -7,16 +7,8 @@ public class BillManage extends QuanLy {
         super.add(object);
     }
 
-   /*  @Override
-    protected void inDS() {
-
-        for (Object object : list) {
-            ((Bill) object).inDS();
-        }
-    } */
     @Override
     public void inDS() {
-        // TODO Auto-generated method stub
         super.inDS();
     }
 }
