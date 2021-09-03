@@ -35,6 +35,7 @@ public class AccountManage extends QuanLy {
             Account account = (Account) i.next();
             if (account.check((Account) object)) {
                 lAccounts.add(account);
+
             }
         }
         return lAccounts.iterator();

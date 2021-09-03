@@ -13,36 +13,30 @@ public class Cart extends QuanLy {
 
     @Override
     public void add(Object object) {
-        add1(inventory.check((Book) object));
+        Book book = inventory.check((Book) object);
+        if (book == null) {
+            System.out.println("Sach da het vui long chon quyen sach khac!!!");
+        } else {
+            add1(book);
+        }
     }
 
     private void add1(Book object) {
 
-        int index = 1;
-        if (this.getList().isEmpty()) {
-            super.add(new Book(object.getMaSach(), object.getTenSach(), object.getNhaXuatBan(),
-                    object.getNgayPhatHanh(), object.getDonGia(), index, object.getTacGia(), object.getTheLoai()));
-            System.out.println("add successful");
+        for (Object book : getList()) {
+            if (object.check((Book) book)) {
 
-        } else {
-            boolean check = true;
-            for (Object book : getList()) {
-                if ((((Book) getList().get(getList().indexOf(book))).getMaSach()) == ((Book) object).getMaSach()) {
-
-                    index = ((Book) getList().get(getList().indexOf(book))).getSoluong();
-                    index++;
-                    ((Book) getList().get(getList().indexOf(book))).setSoluong(index);
-                    System.out.println("add successful");
-                    check = false;
-                }
-            }
-            if (check) {
-
-                super.add(new Book(object.getMaSach(), object.getTenSach(), object.getNhaXuatBan(),
-                        object.getNgayPhatHanh(), object.getDonGia(), index, object.getTacGia(), object.getTheLoai()));
+                ((Book) getList().get(getList().indexOf(book)))
+                        .setSoluong(((Book) getList().get(getList().indexOf(book))).getSoluong() + 1);
                 System.out.println("add successfully");
+                return;
             }
         }
+
+        super.add(new Book(object.getMaSach(), object.getTenSach(), object.getNhaXuatBan(), object.getNgayPhatHanh(),
+                object.getDonGia(), 1, object.getTacGia(), object.getTheLoai()));
+
+        System.out.println("add successfully");
     }
 
     public double tongTien() {

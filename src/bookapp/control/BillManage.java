@@ -1,9 +1,6 @@
 package bookapp.control;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
 import bookapp.entity.Bill;
 
 public class BillManage extends QuanLy {
@@ -21,5 +18,4 @@ public class BillManage extends QuanLy {
             bill.inDS();
         }
     }
-
 }

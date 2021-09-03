@@ -54,21 +54,18 @@ public class Inventory extends QuanLy {
     }
 
     protected Book check(Book book) {
-        Iterator<Object> i = getList().iterator();
+        Iterator i = getList().iterator();
         while (i.hasNext()) {
             Book book2 = (Book) i.next();
-            int amount = book2.getSoluong();
-            if (amount < 1) {
-                return null;
-            } else {
-                if (book.check(book)) {
-                    amount--;
-                    book2.setSoluong(amount);
-                    return book2;
+            if (book2.check(book)) {
+                if (book2.getSoluong() == 0) {
+                    return null;
                 }
+                book2.setSoluong(book2.getSoluong() - 1);
+                return book2;
             }
         }
+
         return null;
     }
-
 }
