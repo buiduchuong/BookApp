@@ -66,17 +66,23 @@ public class Cart extends QuanLy {
 
     @Override
     public void remove(Object object) {
-        super.remove(object);
-    }
-
-    @Override
-    public Iterator<Object> search(Object object) {
-        return super.search(object);
+        for (Object book : getList()) {
+            if (((Book) book).check((Book) object)) {
+                getList().remove(book);
+                System.out.println("xoa sach thanh cong");
+                return;
+            }
+        }
+        System.out.println("khong tim thay ma sach");
     }
 
     @Override
     public void inDS() {
-        super.inDS();
+        Iterator i = getList().iterator();
+        while (i.hasNext()) {
+            Book book = (Book) i.next();
+            System.out.println(book.toString());
+        }
     }
 
 }

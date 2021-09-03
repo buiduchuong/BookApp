@@ -1,6 +1,9 @@
 package bookapp.control;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import bookapp.entity.Book;
 
 public class Inventory extends QuanLy {
@@ -12,17 +15,36 @@ public class Inventory extends QuanLy {
 
     @Override
     public void remove(Object object) {
-        super.remove(object);
+        for (Object book : getList()) {
+            if (((Book) book).check((Book) object)) {
+                getList().remove(book);
+                System.out.println("xoa sach thanh cong");
+                return;
+            }
+        }
+        System.out.println("khong tim thay ma sach");
     }
 
     @Override
     public Iterator<Object> search(Object object) {
-        return super.search(object);
+        List<Object> lAccounts = new ArrayList<Object>();
+        Iterator<Object> i = getList().iterator();
+        while (i.hasNext()) {
+            Book book = (Book) i.next();
+            if (book.check((Book) object)) {
+                lAccounts.add(book);
+            }
+        }
+        return lAccounts.iterator();
     }
 
     @Override
     public void inDS() {
-        super.inDS();
+        Iterator i = getList().iterator();
+        while (i.hasNext()) {
+            Book book = (Book) i.next();
+            System.out.println(book.toString());
+        }
     }
 
     public void inDSS() {
@@ -46,7 +68,7 @@ public class Inventory extends QuanLy {
                 }
             }
         }
-     return null;  
+        return null;
     }
 
 }

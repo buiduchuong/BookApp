@@ -48,6 +48,9 @@ public class Book {
     }
 
     public boolean check(Category category) {
+        if (category == null) {
+            return false;
+        }
         if (category != this.theLoai) {
             return false;
         }

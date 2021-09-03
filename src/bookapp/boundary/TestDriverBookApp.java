@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Scanner;
 
-
 public class TestDriverBookApp {
     static Scanner sc = new Scanner(System.in);
 
@@ -41,8 +40,8 @@ public class TestDriverBookApp {
                         int i = accountManage.getList().indexOf(account2);
                         if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
 
-                            customerFunction(inventoryManage, (Cart) cartManage, (AccountManage) accountManage, account, customerInfo,
-                                    billManage);
+                            customerFunction(inventoryManage, (Cart) cartManage, (AccountManage) accountManage, account,
+                                    customerInfo, billManage);
                         } else {
 
                             managerFunction(accountManage, inventoryManage, billManage);
@@ -176,7 +175,6 @@ public class TestDriverBookApp {
             System.out.println("7. Thanh toan sach trong gio do");
             System.out.println("0. Log out");
             int number = sc.nextInt();
-            sc.nextLine();
             switch (number) {
                 case 1:
                     inventory.inDS();
@@ -218,21 +216,23 @@ public class TestDriverBookApp {
                     break;
                 case 7:
                     Payment payment = new Payment(cart);
+                    System.out.println("danh sach mua hang");
+                    cart.inDS();
+                    System.out.println();
+                    System.out.println();
+                    System.out.println("tong tien la: " + cart.tongTien());
+                    sc.nextLine();
+                    System.out.println("nhap ho ten: ");
+                    String hoTen = sc.nextLine();
+                    System.out.println("Nhap dia chi: ");
+                    String diaChi = sc.nextLine();
+                    System.out.println("Nhap so dien thoai: ");
+                    int sdt = sc.nextInt();
+
                     if (payment.thanhToan(accounts, accountManage)) {
-                        System.out.println("danh sach mua hang");
-                        cart.inDS();
-                        System.out.println();
-                        System.out.println();
-                        System.out.println("tong tien la: " + cart.tongTien());
-                        System.out.println("nhap ho ten: ");
-                        String hoTen = sc.nextLine();
-                        System.out.println("Nhap dia chi: ");
-                        String diaChi = sc.nextLine();
-                        System.out.println("Nhap so dien thoai: ");
-                        int sdt = sc.nextInt();
-                        System.out.println("Thanh toan thanh cong");
                         billManage.add(new Bill(cart, new CustomerInfo(hoTen, diaChi, sdt)));
                         cart.removeAll();
+                        System.out.println("Thanh toan thanh cong");
                     } else {
                         System.out.println("so du khong du, vui long nap tien !!!");
                     }

@@ -1,7 +1,10 @@
 package bookapp.control;
 
 import bookapp.entity.*;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class AccountManage extends QuanLy {
 
@@ -16,17 +19,34 @@ public class AccountManage extends QuanLy {
 
     @Override
     public void remove(Object object) {
-        super.remove(object);
+        for (Object account : getList()) {
+            if (((Account) account).check((Account) object)) {
+                getList().remove(account);
+                System.out.println("Xoa thanh cong");
+            }
+        }
     }
 
     @Override
     public Iterator<Object> search(Object object) {
-        return super.search(object);
+        List<Object> lAccounts = new ArrayList<Object>();
+        Iterator<Object> i = getList().iterator();
+        while (i.hasNext()) {
+            Account account = (Account) i.next();
+            if (account.check((Account) object)) {
+                lAccounts.add(account);
+            }
+        }
+        return lAccounts.iterator();
     }
 
     @Override
     public void inDS() {
-        super.inDS();
+        Iterator i = getList().iterator();
+        while (i.hasNext()) {
+            Account account = (Account) i.next();
+            System.out.println(account.toString());
+        }
     }
 
     public boolean napTien(double soTien, Account account) {
