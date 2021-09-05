@@ -8,6 +8,10 @@ public class Account {
 
     }
 
+    public Account(String account) {
+        this.account = account;
+    }
+
     public Account(String account, String password) {
         this.account = account;
         this.password = password;
@@ -30,7 +34,13 @@ public class Account {
         }
         return true;
     }
-    
+
+    public boolean check(String accountStr) {
+        if (!accountStr.equals(this.account) || accountStr == null || accountStr.equals("")) {
+            return false;
+        }
+        return true;
+    }
 
     public boolean check(double soTien) {
         if (soTien < 50000) {

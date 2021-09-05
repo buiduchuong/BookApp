@@ -33,7 +33,7 @@ public class AccountManage extends QuanLy {
         Iterator<Object> i = getList().iterator();
         while (i.hasNext()) {
             Account account = (Account) i.next();
-            if (account.check((Account) object)) {
+            if (account.check(((Account) object).getAccount())) {
                 lAccounts.add(account);
 
             }

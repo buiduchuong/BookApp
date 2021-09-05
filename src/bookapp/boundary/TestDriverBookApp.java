@@ -4,6 +4,7 @@ import bookapp.control.*;
 import bookapp.entity.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -24,21 +25,31 @@ public class TestDriverBookApp {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        boolean kiemtra = true;
 
-        while (true) {
-            System.out.println("1. dang nhap");
-            System.out.println("2. dang ky");
-            int number = sc.nextInt();
-            sc.nextLine();
+        while (kiemtra) {
+            int number = 0;
+            boolean kiemtra1 = true;
+            while (kiemtra1) {
+
+                try {
+                    System.out.println("1. dang nhap");
+                    System.out.println("2. dang ky");
+                    System.out.println("-> Nhap so khac de thoat");
+                    number = sc.nextInt();
+                    kiemtra1 = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("Khong hop le vui long nhap lai!!!");
+                    System.out.println();
+                    kiemtra1 = true;
+                    sc.nextLine();
+                }
+            }
             switch (number) {
                 case 1:
                     Account account = nhap();
                     if (Login.singIn(account, accountManage)) {
-                        Iterator<Object> iterator = accountManage.search(account);
-                        Account account2 = (Account) iterator.next();
-                        String str = "admin";
-                        int i = accountManage.getList().indexOf(account2);
-                        if (!str.equals(((Account) accountManage.getList().get(i)).getAccount())) {
+                        if (!account.getAccount().equals("admin")) {
 
                             customerFunction(inventoryManage, (Cart) cartManage, (AccountManage) accountManage, account,
                                     customerInfo, billManage);
@@ -52,9 +63,13 @@ public class TestDriverBookApp {
                         System.out.println("Incorrect username or password");
                     }
                     break;
+                case 2:
+                    Login.signUp(nhap(), accountManage);
+                    break;
 
                 default:
-                    Login.signUp(nhap(), accountManage);
+                    System.out.println("------------GOOD BYE------------");
+                    kiemtra = false;
                     break;
             }
 
@@ -62,6 +77,7 @@ public class TestDriverBookApp {
     }
 
     public static Account nhap() {
+        sc.nextLine();
         System.out.println("Username:  ");
         String account1 = sc.nextLine();
         System.out.println("Password: ");
@@ -104,22 +120,37 @@ public class TestDriverBookApp {
     public static void managerFunction(QuanLy accountManage, QuanLy inventory, QuanLy billManage) {
         boolean check = true;
         while (check) {
+            int number = 0;
+            boolean kiemtra1 = true;
+            while (kiemtra1) {
+                try {
+                    System.out.println("1. xem danh sach tai khoan");
+                    System.out.println("2. tim tai khoan");
+                    System.out.println("3. xoa tai khoan");
+                    System.out.println("4. them sach vao trong kho");
+                    System.out.println("5. xoa sach khoi kho");
+                    System.out.println("6. xem danh sach kho");
+                    System.out.println("7. xem hoa don");
+                    System.out.println("-> Nhap so khac de dang xuat");
+                    number = sc.nextInt();
+                    kiemtra1 = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("Khong hop le vui long nhap lai!!!");
+                    System.out.println();
+                    kiemtra1 = true;
+                    sc.nextLine();
+                }
 
-            System.out.println("1. xem danh sach tai khoan");
-            System.out.println("2. tim tai khoan");
-            System.out.println("3. xoa tai khoan");
-            System.out.println("4. them sach vao trong kho");
-            System.out.println("5. xoa sach khoi kho");
-            System.out.println("6. xem danh sach kho");
-            System.out.println("7. xem hoa don");
-            System.out.println("0. Log out");
-
-            switch (sc.nextInt()) {
+            }
+            switch (number) {
                 case 1:
                     accountManage.inDS();
                     break;
                 case 2:
-                    Iterator<Object> iterator = accountManage.search(new Account("a", "ac"));
+                    sc.nextLine();
+                    System.out.println("Nhap ten tai khoan can tim");
+                    String accountStr = sc.nextLine();
+                    Iterator iterator = accountManage.search(new Account(accountStr));
                     if (iterator.hasNext()) {
                         while (iterator.hasNext()) {
                             Account account = (Account) iterator.next();
@@ -130,7 +161,12 @@ public class TestDriverBookApp {
                     }
                     break;
                 case 3:
-                    accountManage.remove(new Account("a", "ac"));
+                    System.out.println("Username:  ");
+                    sc.nextLine();
+                    String account1 = sc.nextLine();
+                    System.out.println("Password: ");
+                    String password = sc.nextLine();
+                    accountManage.remove(new Account(account1, password));
                     break;
                 case 4:
                     try {
@@ -143,7 +179,22 @@ public class TestDriverBookApp {
                     System.out.println("add successful");
                     break;
                 case 5:
-                    inventory.remove(new Book(344, "the Catcher in the Rye"));
+                    System.out.println("Nhap ma sach can xoa:");
+                    int masach = 0;
+                    boolean che1k = false;
+                    while (!che1k) {
+
+                        try {
+                            masach = sc.nextInt();
+                            che1k = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ma sach khong hop le vui long nhap lai!!!");
+                            che1k = false;
+                            sc.nextLine();
+                        }
+
+                    }
+                    inventory.remove(new Book(masach));
                     break;
                 case 6:
                     inventory.inDS();
@@ -157,24 +208,37 @@ public class TestDriverBookApp {
                     break;
             }
         }
+
     }
 
     public static void customerFunction(QuanLy inventory, Cart cart, AccountManage accountManage, Account accounts,
             CustomerInfo customerInfo, QuanLy billManage) {
         boolean check = true;
-        ((Inventory) inventory).inDSS();
         System.out.println();
         while (check) {
+            int number = 0;
+            boolean kiemtra1 = true;
+            while (kiemtra1) {
+                try {
+                    System.out.println("1. xem sach ");
+                    System.out.println("2. tim sach");
+                    System.out.println("3. them sach vao gio do");
+                    System.out.println("4. xem danh saach gio do");
+                    System.out.println("5. Nap tien vao tai khoan");
+                    System.out.println("6. Xem so du tai khoan");
+                    System.out.println("7. Thanh toan sach trong gio do");
+                    System.out.println("8. Xoa sach khoi gio do");
+                    System.out.println("-> Nhap so khac de dang xuat");
+                    number = sc.nextInt();
+                    kiemtra1 = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("Khong hop le vui long nhap lai!!!");
+                    System.out.println();
+                    kiemtra1 = true;
+                    sc.nextLine();
+                }
 
-            System.out.println("1. xem them sach ");
-            System.out.println("2. tim sach");
-            System.out.println("3. them sach vao gio do");
-            System.out.println("4. xem danh saach gio do");
-            System.out.println("5. Nap tien vao tai khoan");
-            System.out.println("6. Xem so du tai khoan");
-            System.out.println("7. Thanh toan sach trong gio do");
-            System.out.println("0. Log out");
-            int number = sc.nextInt();
+            }
             switch (number) {
                 case 1:
                     inventory.inDS();
@@ -203,8 +267,21 @@ public class TestDriverBookApp {
                     cart.inDS();
                     break;
                 case 5:
-                    System.out.println("nhap so tien can nap");
-                    if (!((AccountManage) accountManage).napTien(sc.nextDouble(), accounts)) {
+                  
+                    double soTien = 0;
+                    boolean kiemtr1 = false;
+                    while (!kiemtr1) {
+                        try {
+                            System.out.println("nhap so tien can nap");
+                            soTien = sc.nextDouble();
+                            kiemtr1 = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("So tien khong hop le vui long nhap lai!!!");
+                            kiemtr1 = false;
+                            sc.nextLine();
+                        }
+                    }
+                    if (!((AccountManage) accountManage).napTien(soTien, accounts)) {
                         System.out.println("so tien toi thieu nap la 50000 vnd");
                     } else {
                         System.out.println("nap tien thanh cong");
@@ -226,9 +303,20 @@ public class TestDriverBookApp {
                     String hoTen = sc.nextLine();
                     System.out.println("Nhap dia chi: ");
                     String diaChi = sc.nextLine();
-                    System.out.println("Nhap so dien thoai: ");
-                    int sdt = sc.nextInt();
-
+                    
+                    int sdt = 0;
+                    boolean kiemtr2 = false;
+                    while (!kiemtr2) {
+                        try {
+                            System.out.println("Nhap so dien thoai: ");
+                            sdt = sc.nextInt();
+                            kiemtr2 = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("So dien thoai khong hop le vui long nhap lai!!!");
+                            kiemtr2 = false;
+                            sc.nextLine();
+                        }
+                    }
                     if (payment.thanhToan(accounts, accountManage)) {
                         billManage.add(new Bill(cart, new CustomerInfo(hoTen, diaChi, sdt)));
                         cart.removeAll();
@@ -236,6 +324,24 @@ public class TestDriverBookApp {
                     } else {
                         System.out.println("so du khong du, vui long nap tien !!!");
                     }
+                    break;
+                case 8:
+                    System.out.println("Nhap ma sach can xoa:");
+                    int masach = 0;
+                    boolean che1k = false;
+                    while (!che1k) {
+
+                        try {
+                            masach = sc.nextInt();
+                            che1k = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ma sach khong hop le vui long nhap lai!!!");
+                            che1k = false;
+                            sc.nextLine();
+                        }
+
+                    }
+                    cart.remove(new Book(masach));
                     break;
                 default:
                     check = false;

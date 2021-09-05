@@ -31,7 +31,7 @@ public class Inventory extends QuanLy {
         Iterator<Object> i = getList().iterator();
         while (i.hasNext()) {
             Book book = (Book) i.next();
-            if (book.check((Book) object)) {
+            if (book.check(((Book) object).getTheLoai())) {
                 lAccounts.add(book);
             }
         }
