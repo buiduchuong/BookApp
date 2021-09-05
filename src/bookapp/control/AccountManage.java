@@ -28,7 +28,7 @@ public class AccountManage extends QuanLy {
     }
 
     @Override
-    public Iterator<Object> search(Object object) {
+    public Iterator<Object> search(Object object)  {
         List<Object> lAccounts = new ArrayList<Object>();
         Iterator<Object> i = getList().iterator();
         while (i.hasNext()) {

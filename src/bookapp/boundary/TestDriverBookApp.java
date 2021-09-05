@@ -4,6 +4,7 @@ import bookapp.control.*;
 import bookapp.entity.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ConcurrentModificationException;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -114,6 +115,8 @@ public class TestDriverBookApp {
 
         accountManage.add(new Account("a12345", "ac"));
         accountManage.add(new Account("b", "ac"));
+        accountManage.add(new Account("huong", "1"));
+        accountManage.add(new Account("chien", "2"));
 
     }
 
@@ -166,7 +169,11 @@ public class TestDriverBookApp {
                     String account1 = sc.nextLine();
                     System.out.println("Password: ");
                     String password = sc.nextLine();
-                    accountManage.remove(new Account(account1, password));
+                    try {
+                        accountManage.remove(new Account(account1, password));
+                    } catch (ConcurrentModificationException e) {
+                    }
+
                     break;
                 case 4:
                     try {
