@@ -1,16 +1,14 @@
 package bookapp.entity;
 
-import java.util.Date;
 
 public class Book {
     private int maSach;
     private String tenSach, nhaXuatBan;
-    private Date ngayPhatHanh;
+    private String ngayPhatHanh;
     private double donGia;
     private int soluong;
     private Author tacGia;
     private Category theLoai;
-    int a;
 
     public Book() {
     }
@@ -28,7 +26,7 @@ public class Book {
         this.tenSach = tenSach;
     }
 
-    public Book(int maSach, String tenSach, String nhaXuatBan, Date ngayPhatHanh, double donGia, int soluong,
+    public Book(int maSach, String tenSach, String nhaXuatBan, String ngayPhatHanh, double donGia, int soluong,
             Author tacGia, Category theLoai) {
         this.maSach = maSach;
         this.tenSach = tenSach;
@@ -80,11 +78,11 @@ public class Book {
         this.tenSach = tenSach;
     }
 
-    public Date getNgayPhatHanh() {
+    public String getNgayPhatHanh() {
         return ngayPhatHanh;
     }
 
-    public void setNgayPhatHanh(Date ngayPhatHanh) {
+    public void setNgayPhatHanh(String ngayPhatHanh) {
         this.ngayPhatHanh = ngayPhatHanh;
     }
 

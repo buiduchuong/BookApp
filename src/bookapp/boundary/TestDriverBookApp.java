@@ -2,9 +2,11 @@ package bookapp.boundary;
 
 import bookapp.control.*;
 import bookapp.entity.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -88,30 +90,24 @@ public class TestDriverBookApp {
 
     public static void khoiTaoDS(QuanLy inventory, QuanLy accountManage) throws ParseException {
 
-        inventory.add(new Book(123, "To Kill a Mockingbird", "Kim Dong",
-                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 100000, 2,
+        inventory.add(new Book(123, "To Kill a Mockingbird", "Kim Dong", "12/09/2001", 100000, 2,
                 new Author("Nguyen Ngoc Chien", "18/3/1998", "Ho Chi Minh"), Category.TIEUTHUYET));
-        inventory.add(
-                new Book(124, "Anna Karenina", "Andrew Matthews", new SimpleDateFormat("dd/MM/yyy").parse("23/09/1998"),
-                        170000, 50, new Author("Ngyen Ngoc Nga", "22/9/1977", "Ha Noi"), Category.VANHOC_NGHETHUAT));
-        inventory.add(new Book(542, "The Great Gatsby", "Thanh Nien",
-                new SimpleDateFormat("dd/MM/yyy").parse("1/1/2004"), 300000, 99,
+        inventory.add(new Book(124, "Anna Karenina", "Andrew Matthews", "23/09/1998", 170000, 50,
+                new Author("Ngyen Ngoc Nga", "22/9/1977", "Ha Noi"), Category.VANHOC_NGHETHUAT));
+        inventory.add(new Book(542, "The Great Gatsby", "Thanh Nien", "1/1/2004", 300000, 99,
                 new Author("Nguyen Viet Trung", "22/12/1977", "Da Nang"), Category.VANHOC_NGHETHUAT));
-        inventory.add(
-                new Book(423, "A Passage to India", "Lao Dong", new SimpleDateFormat("dd/MM/yyy").parse("22/8/1995"),
-                        125000, 120, new Author("Nguyen Ngoc Anh", "29/1/2001", "HCM"), Category.GIAOTRINH));
-        inventory.add(new Book(657, "Invisible Man", "J K Rowling", new SimpleDateFormat("dd/MM/yyy").parse("8/7/2007"),
-                248000, 13, new Author("Nguyen Van Thanh", "13/3/1993", "New York"), Category.KHCN_KINHTE));
-        inventory
-                .add(new Book(56756, "Don Quixote", "Og Mandino", new SimpleDateFormat("dd/MM/yyy").parse("25/10/1998"),
-                        131000, 11, new Author("nguyen Minh Dung", "24/04/1994", "Dak Lak"), Category.THIEUNHI));
-        inventory.add(new Book(657, "Beloved", "Meredith McIver ", new SimpleDateFormat("dd/MM/yyy").parse("27/9/1989"),
-                115000, 93, new Author("Parkstone Press", "18/09/1956", "LONDON"), Category.VANHOC_NGHETHUAT));
-        inventory.add(new Book(344, "Bollywood", "J. D. Salinger", new SimpleDateFormat("dd/MM/yyy").parse("2/3/1992"),
-                90000, 29, new Author("Nguyen Ngoc Ha", "13/2/1988", "Singapo"), Category.THIEUNHI));
-        inventory
-                .add(new Book(331, "Thomas Jefferson", "Hemingway", new SimpleDateFormat("dd/MM/yyy").parse("3/4/2001"),
-                        30000, 82, new Author("Thomas Jefferson", "9/12/1977", "Lao"), Category.CHINHTRI_PHAPLUAT));
+        inventory.add(new Book(423, "A Passage to India", "Lao Dong", "22/8/1995", 125000, 120,
+                new Author("Nguyen Ngoc Anh", "29/1/2001", "HCM"), Category.GIAOTRINH));
+        inventory.add(new Book(657, "Invisible Man", "J K Rowling", "8/7/2007", 248000, 13,
+                new Author("Nguyen Van Thanh", "13/3/1993", "New York"), Category.KHCN_KINHTE));
+        inventory.add(new Book(56756, "Don Quixote", "Og Mandino", "25/10/1998", 131000, 11,
+                new Author("nguyen Minh Dung", "24/04/1994", "Dak Lak"), Category.THIEUNHI));
+        inventory.add(new Book(657, "Beloved", "Meredith McIver ", "27/9/1989", 115000, 93,
+                new Author("Parkstone Press", "18/09/1956", "LONDON"), Category.VANHOC_NGHETHUAT));
+        inventory.add(new Book(344, "Bollywood", "J. D. Salinger", "2/3/1992", 90000, 29,
+                new Author("Nguyen Ngoc Ha", "13/2/1988", "Singapo"), Category.THIEUNHI));
+        inventory.add(new Book(331, "Thomas Jefferson", "Hemingway", "3/4/2001", 30000, 82,
+                new Author("Thomas Jefferson", "9/12/1977", "Lao"), Category.CHINHTRI_PHAPLUAT));
 
         accountManage.add(new Account("a12345", "ac"));
         accountManage.add(new Account("b", "ac"));
@@ -173,25 +169,97 @@ public class TestDriverBookApp {
                         accountManage.remove(new Account(account1, password));
                     } catch (ConcurrentModificationException e) {
                     }
-
                     break;
                 case 4:
-                    try {
-                        inventory.add(new Book(3391, "Java 102", "MJ",
-                                new SimpleDateFormat("dd/MM/yyy").parse("12/09/2001"), 120000, 3,
-                                new Author("JavSOn", "18/11/1921", "AC"), Category.VANHOC_NGHETHUAT));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    int maSach = 0;
+                    boolean check1 = false;
+                    while (!check1) {
+                        try {
+                            System.out.println("Nhap ma sach: ");
+                            maSach = sc.nextInt();
+                            check1 = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ma sach khong hop le vui long nhap lai!!!");
+                            check1 = false;
+                            sc.nextLine();
+                        }
                     }
+                    System.out.println("Nhap ten sach:");
+                    sc.nextLine();
+                    String tenSach = sc.nextLine();
+                    System.out.println("Nhap nha xuat ban: ");
+                    String nhaXuatBan = sc.nextLine();
+                    boolean check2 = false;
+                    String ngayPhatHanh = "";
+                    while (!check2) {
+                        try {
+                            System.out.println("Nhap ngay phat hanh: ");
+                            ngayPhatHanh = sc.nextLine();
+                            new SimpleDateFormat("dd/MM/yyy").parse(ngayPhatHanh);
+                            check2 = true;
+                        } catch (ParseException e1) {
+                            System.out.println("Khong hop le vui long nhap lai!!!");
+                            check2 = false;
+                        }
+                    }
+
+                    double donGia = 0;
+                    boolean check3 = false;
+                    while (!check3) {
+                        try {
+                            System.out.println("Nhap don gia: ");
+                            donGia = sc.nextDouble();
+                            check3 = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Khong hop le vui long nhap lai!!!");
+                            check3 = false;
+                            sc.nextLine();
+                        }
+                    }
+
+                    int soluong = 0;
+                    boolean check4 = false;
+                    while (!check4) {
+                        try {
+                            System.out.println("Nhap so luong: ");
+                            soluong = sc.nextInt();
+                            check4 = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Khong hop le vui long nhap lai!!!");
+                            check4 = false;
+                            sc.nextLine();
+                        }
+                    }
+                    System.out.println("Nhap ho ten: ");
+                    sc.nextLine();
+                    String hoten = sc.nextLine();
+                    boolean check5 = false;
+                    String ngaysinh = "";
+                    while (!check5) {
+                        try {
+                            System.out.println("Nhap ngay sinh: ");
+                            ngaysinh = sc.nextLine();
+                            new SimpleDateFormat("dd/MM/yyy").parse(ngaysinh);
+                            check5 = true;
+                        } catch (ParseException e1) {
+                            System.out.println("Khong hop le vui long nhap lai!!!");
+                            check5 = false;
+                        }
+                    }
+                    System.out.println("Nhap dia chi: ");
+                    String diachi = sc.nextLine();
+
+                    inventory.add(new Book(maSach, tenSach, nhaXuatBan, ngayPhatHanh, donGia, soluong,
+                            new Author(hoten, ngaysinh, diachi), Category.GIAOTRINH));
+
                     System.out.println("add successful");
                     break;
                 case 5:
-                    System.out.println("Nhap ma sach can xoa:");
                     int masach = 0;
                     boolean che1k = false;
                     while (!che1k) {
-
                         try {
+                            System.out.println("Nhap ma sach can xoa:");
                             masach = sc.nextInt();
                             che1k = true;
                         } catch (InputMismatchException e) {
