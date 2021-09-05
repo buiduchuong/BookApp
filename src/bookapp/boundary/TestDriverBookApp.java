@@ -257,8 +257,21 @@ public class TestDriverBookApp {
                     }
                     break;
                 case 3:
-                    System.out.println("Nhap ma sach can them vao gio do");
-                    int maSach = sc.nextInt();
+                    int maSach = 0;
+                    boolean check1 = false;
+                    while (!check1) {
+
+                        try {
+                            System.out.println("Nhap ma sach can them vao gio do");
+                            maSach = sc.nextInt();
+                            check1 = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ma sach khong hop le vui long nhap lai!!!");
+                            check1 = false;
+                            sc.nextLine();
+                        }
+
+                    }
 
                     cart.add(new Book(maSach));
 
@@ -267,7 +280,7 @@ public class TestDriverBookApp {
                     cart.inDS();
                     break;
                 case 5:
-                  
+
                     double soTien = 0;
                     boolean kiemtr1 = false;
                     while (!kiemtr1) {
@@ -303,7 +316,7 @@ public class TestDriverBookApp {
                     String hoTen = sc.nextLine();
                     System.out.println("Nhap dia chi: ");
                     String diaChi = sc.nextLine();
-                    
+
                     int sdt = 0;
                     boolean kiemtr2 = false;
                     while (!kiemtr2) {
@@ -326,12 +339,13 @@ public class TestDriverBookApp {
                     }
                     break;
                 case 8:
-                    System.out.println("Nhap ma sach can xoa:");
+
                     int masach = 0;
                     boolean che1k = false;
                     while (!che1k) {
 
                         try {
+                            System.out.println("Nhap ma sach can xoa:");
                             masach = sc.nextInt();
                             che1k = true;
                         } catch (InputMismatchException e) {
