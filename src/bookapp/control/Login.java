@@ -25,5 +25,6 @@ public class Login {
             }
         }
         accountManage.add(account);
+        System.out.println("Dang ky thanh cong");
     }
 }

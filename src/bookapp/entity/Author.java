@@ -42,5 +42,4 @@ public class Author {
     public String toString() {
         return "TacGia [diachi=" + diachi + ", hoten=" + hoten + ", ngaysinh=" + ngaysinh + "]";
     }
-
 }

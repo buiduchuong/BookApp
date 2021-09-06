@@ -321,7 +321,7 @@ public class TestDriverBookApp {
                     break;
                 case 2:
 
-                    Iterator<Object> iterator = ((Inventory) inventory).search(new Book(Category.CHINHTRI_PHAPLUAT));
+                    Iterator<Object> iterator = ((Inventory) inventory).search(new Book(Category.VANHOC_NGHETHUAT));
                     if (iterator.hasNext()) {
                         while (iterator.hasNext()) {
                             Book book2 = (Book) iterator.next();
