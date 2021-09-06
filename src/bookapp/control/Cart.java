@@ -26,8 +26,7 @@ public class Cart extends QuanLy {
         for (Object book : getList()) {
             if (object.check((Book) book)) {
 
-                ((Book) getList().get(getList().indexOf(book)))
-                        .setSoluong(((Book) getList().get(getList().indexOf(book))).getSoluong() + 1);
+                ((Book) book).setSoluong(((Book) book).getSoluong() + 1);
                 System.out.println("add successfully");
                 return;
             }
