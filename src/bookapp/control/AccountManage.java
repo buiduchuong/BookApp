@@ -13,11 +13,6 @@ public class AccountManage extends QuanLy {
     }
 
     @Override
-    public void add(Object object) {
-        super.add(object);
-    }
-
-    @Override
     public void remove(Object object) {
         for (Object account : getList()) {
             if (((Account) account).check((Account) object)) {
@@ -28,7 +23,7 @@ public class AccountManage extends QuanLy {
     }
 
     @Override
-    public Iterator<Object> search(Object object)  {
+    public Iterator<Object> search(Object object) {
         List<Object> lAccounts = new ArrayList<Object>();
         Iterator<Object> i = getList().iterator();
         while (i.hasNext()) {

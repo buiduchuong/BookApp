@@ -2,7 +2,6 @@ package bookapp.control;
 
 import bookapp.entity.*;
 import java.util.Iterator;
-import java.util.List;
 
 public class Cart extends QuanLy {
 

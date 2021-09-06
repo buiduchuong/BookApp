@@ -9,11 +9,6 @@ import bookapp.entity.Book;
 public class Inventory extends QuanLy {
 
     @Override
-    public void add(Object object) {
-        super.add(object);
-    }
-
-    @Override
     public void remove(Object object) {
         for (Object book : getList()) {
             if (((Book) book).check((Book) object)) {
