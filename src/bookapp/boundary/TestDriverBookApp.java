@@ -229,14 +229,14 @@ public class TestDriverBookApp {
                             sc.nextLine();
                         }
                     }
-                    System.out.println("Nhap ho ten: ");
+                    System.out.println("Nhap ho ten tac gia: ");
                     sc.nextLine();
                     String hoten = sc.nextLine();
                     boolean check5 = false;
                     String ngaysinh = "";
                     while (!check5) {
                         try {
-                            System.out.println("Nhap ngay sinh: ");
+                            System.out.println("Nhap ngay sinh tac gia: ");
                             ngaysinh = sc.nextLine();
                             new SimpleDateFormat("dd/MM/yyy").parse(ngaysinh);
                             check5 = true;
@@ -245,7 +245,7 @@ public class TestDriverBookApp {
                             check5 = false;
                         }
                     }
-                    System.out.println("Nhap dia chi: ");
+                    System.out.println("Nhap dia chi tac gia: ");
                     String diachi = sc.nextLine();
 
                     inventory.add(new Book(maSach, tenSach, nhaXuatBan, ngayPhatHanh, donGia, soluong,
