@@ -3,11 +3,11 @@ package bookapp.control;
 import bookapp.entity.*;
 import java.util.Iterator;
 
-public class Cart extends QuanLy {
+public class Cart extends Manage {
 
     Inventory inventory;
 
-    public Cart(QuanLy inventory) {
+    public Cart(Manage inventory) {
         this.inventory = (Inventory) inventory;
     }
 

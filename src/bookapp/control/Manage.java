@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class QuanLy {
+public abstract class Manage {
     private List<Object> list;
 
-    public QuanLy() {
+    public Manage() {
         this.list = new ArrayList<Object>();
     }
 

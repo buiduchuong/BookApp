@@ -4,7 +4,7 @@ import java.util.Iterator;
 import bookapp.entity.*;
 
 public class Login {
-    public static boolean singIn(Account account1, QuanLy accountManage) {
+    public static boolean singIn(Account account1, Manage accountManage) {
         Iterator<Object> i = accountManage.getList().iterator();
         while (i.hasNext()) {
             Account account = (Account) i.next();
@@ -15,7 +15,7 @@ public class Login {
         return false;
     }
 
-    public static void signUp(Account account, QuanLy accountManage) {
+    public static void signUp(Account account, Manage accountManage) {
         Iterator<Object> i = accountManage.getList().iterator();
         while (i.hasNext()) {
             Account account1 = (Account) i.next();

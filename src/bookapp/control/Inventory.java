@@ -6,7 +6,7 @@ import java.util.List;
 
 import bookapp.entity.Book;
 
-public class Inventory extends QuanLy {
+public class Inventory extends Manage {
 
     @Override
     public void remove(Object object) {

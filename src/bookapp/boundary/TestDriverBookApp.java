@@ -16,7 +16,7 @@ public class TestDriverBookApp {
     public static void main(String[] args) {
 
         CustomerInfo customerInfo = new CustomerInfo();
-        QuanLy inventoryManage, accountManage, cartManage, billManage;
+        Manage inventoryManage, accountManage, cartManage, billManage;
         inventoryManage = new Inventory();
         accountManage = new AccountManage();
         cartManage = new Cart(inventoryManage);
@@ -87,7 +87,7 @@ public class TestDriverBookApp {
         return new Account(account1, password);
     }
 
-    public static void khoiTaoDS(QuanLy inventory, QuanLy accountManage) throws ParseException {
+    public static void khoiTaoDS(Manage inventory, Manage accountManage) throws ParseException {
 
         inventory.add(new Book(123, "To Kill a Mockingbird", "Kim Dong", "12/09/2001", 100000, 2,
                 new Author("Nguyen Ngoc Chien", "18/3/1998", "Ho Chi Minh"), Category.TIEUTHUYET));
@@ -115,7 +115,7 @@ public class TestDriverBookApp {
 
     }
 
-    public static void managerFunction(QuanLy accountManage, QuanLy inventory, QuanLy billManage) {
+    public static void managerFunction(Manage accountManage, Manage inventory, Manage billManage) {
         boolean check = true;
         while (check) {
             int number = 0;
@@ -285,8 +285,8 @@ public class TestDriverBookApp {
 
     }
 
-    public static void customerFunction(QuanLy inventory, Cart cart, AccountManage accountManage, Account accounts,
-            CustomerInfo customerInfo, QuanLy billManage) {
+    public static void customerFunction(Manage inventory, Cart cart, AccountManage accountManage, Account accounts,
+            CustomerInfo customerInfo, Manage billManage) {
         boolean check = true;
         System.out.println();
         while (check) {

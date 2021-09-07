@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class AccountManage extends QuanLy {
+public class AccountManage extends Manage {
 
     public AccountManage() {
         add(new Account("admin", "password"));

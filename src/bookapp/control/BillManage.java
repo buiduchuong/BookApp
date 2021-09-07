@@ -3,7 +3,7 @@ package bookapp.control;
 import java.util.Iterator;
 import bookapp.entity.Bill;
 
-public class BillManage extends QuanLy {
+public class BillManage extends Manage {
 
     @Override
     public void inDS() {
